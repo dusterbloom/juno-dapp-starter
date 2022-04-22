@@ -1,4 +1,5 @@
-# juno-dapp-starter 
+# juno-dapp-starter
+
 ## Getting Started
 
 First, bootstrap your new project with this example using [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app):

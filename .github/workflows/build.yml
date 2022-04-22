@@ -21,3 +21,4 @@ jobs:
           yarn install
           yarn lint
           yarn build
+          yarn prettier:check
