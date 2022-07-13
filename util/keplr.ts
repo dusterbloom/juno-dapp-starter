@@ -4,9 +4,9 @@ import { convertFromMicroDenom } from "../util/conversion";
 
 const CosmosCoinType = 118;
 const GasPrices = {
-  low: 0.01,
-  average: 0.025,
-  high: 0.03,
+  low: 0.1,
+  average: 0.25,
+  high: 0.4,
 };
 
 declare global {
