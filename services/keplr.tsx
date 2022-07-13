@@ -105,7 +105,7 @@ export const connectKeplr = async () => {
           // If this field is not provided, Keplr extension will set the default gas price as (low: 0.01, average: 0.025, high: 0.04).
           // Currently, Keplr doesn't support dynamic calculation of the gas prices based on on-chain data.
           // Make sure that the gas prices are higher than the minimum gas prices accepted by chain validators and RPC/REST endpoint.
-         features: cosmwasm,
+         features: ['cosmwasm'],
           gasPriceStep: {
             low: 0.1,
             average: 0.25,
