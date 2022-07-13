@@ -85,7 +85,7 @@ export async function suggestChain(): Promise<void> {
         coinDecimals,
       },
     ],
-    features: ['cosmwasm'],
+    features: [cosmwasm],
     stakeCurrency: {
       coinDenom,
       coinMinimalDenom,
