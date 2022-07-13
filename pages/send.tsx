@@ -11,7 +11,7 @@ import {
 } from "util/conversion";
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
-const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "ujuno";
+const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlgS";
 
 const Send: NextPage = () => {
   const { walletAddress, signingClient } = useSigningClient();
