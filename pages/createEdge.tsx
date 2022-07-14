@@ -1,13 +1,8 @@
 import { useState, useEffect, MouseEvent } from "react";
+import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate"
+
 import type { NextPage } from "next";
 import { StdFee, Coin } from "@cosmjs/amino";
-import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate"
-import { GasPrice } from "@cosmjs/stargate"
-import { DirectSecp256k1HdWallet, EncodeObject } from "@cosmjs/proto-signing"
-import { LedgerSigner } from "@cosmjs/ledger-amino"
-import { MsgExecuteContract } from "cosmjs-types/cosmwasm/wasm/v1/tx"
-import { toUtf8 } from "@cosmjs/encoding"
-
 import WalletLoader from "components/WalletLoader";
 import { useSigningClient } from "contexts/cosmwasm";
 import {
@@ -18,7 +13,6 @@ import {
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
 const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg";
-// const CONTRACT_ADDRESS = "wasm1vuxslzss23m6cm0r4k3xuzgmrjzlecd9ajr8gm9esp7phamzv90sg8erp4"
 
 // const querySmartContract = async (message: Record<string, unknown>) => {
 //     client.queryContractSmart(CONTRACT_ADDRESS, message)
@@ -33,6 +27,8 @@ const Create: NextPage = () => {
   const [edgeAmount, setEdgeAmount] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const [contractAddress] = useState("");
+
 
   useEffect(() => {
     if (!signingClient || walletAddress.length === 0) {
@@ -60,15 +56,15 @@ const Create: NextPage = () => {
     setError("");
     setSuccess("");
     setLoading(true);
-    const amount: Coin[] = [
+    const txMessage: Coin[] = [
       {
         amount: convertDenomToMicroDenom(edgeAmount),
-        denom: PUBLIC_STAKING_DENOM,
+        creditorAddress: String,
       },
     ];
 
-    signingClient
-      ?.sendTokens(walletAddress, creditorAddress, amount, "auto")
+    signAndBroadcastMessage
+      ?.createEdge(walletAddress, creditorAddress, txMessage, "auto")
       .then((resp) => {
         console.log("resp", resp);
 

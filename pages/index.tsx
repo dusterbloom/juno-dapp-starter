@@ -5,6 +5,8 @@ import { useSigningClient } from "contexts/cosmwasm";
 
 const Home: NextPage = () => {
   const { walletAddress } = useSigningClient();
+  const CONTRACT_ADDRESS = "wasm1vuxslzss23m6cm0r4k3xuzgmrjzlecd9ajr8gm9esp7phamzv90sg8erp4"
+
 
   return (
     <WalletLoader>
@@ -30,6 +32,19 @@ const Home: NextPage = () => {
         </Link>
       </div>
     </WalletLoader>
+    
+    <EdgeCreator>
+    <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 max-w-full sm:w-full">
+    <Link href="/createEdge" passHref>
+      <a className="p-6 mt-6 text-left border border-secondary hover:border-primary w-96 rounded-xl hover:text-primary focus:text-primary-focus">
+        <h3 className="text-2xl font-bold">Record an obligation &rarr;</h3>
+        <p className="mt-4 text-xl">
+          Record a debt or an obligation owed to another user.
+        </p>
+      </a>
+    </Link>
+  </div>
+</EdgeCreator>
   );
 };
 
