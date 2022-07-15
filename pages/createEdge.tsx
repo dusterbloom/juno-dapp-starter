@@ -1,8 +1,7 @@
 import { useState, useEffect, MouseEvent } from "react";
-import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate"
-
 import type { NextPage } from "next";
 import { StdFee, Coin } from "@cosmjs/amino";
+
 import WalletLoader from "components/WalletLoader";
 import { useSigningClient } from "contexts/cosmwasm";
 import {
