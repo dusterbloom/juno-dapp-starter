@@ -56,7 +56,7 @@ const Create: NextPage = () => {
     setError("");
     setSuccess("");
     setLoading(true);
-    const txMessage: Coin[] = [
+    const txMessage: CreateEdge[] = [
       {
         amount: convertDenomToMicroDenom(edgeAmount),
         creditorAddress: String,

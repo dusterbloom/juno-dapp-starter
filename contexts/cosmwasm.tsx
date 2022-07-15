@@ -13,6 +13,7 @@ let { Provider } = (CosmWasmContext =
     error: null,
     connectWallet: () => {},
     disconnect: () => {},
+    contractAddress: "wasm1vuxslzss23m6cm0r4k3xuzgmrjzlecd9ajr8gm9esp7phamzv90sg8erp4",
   }));
 
 export const useSigningClient = (): ISigningCosmWasmClientContext =>
