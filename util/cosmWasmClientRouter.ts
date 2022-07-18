@@ -7,7 +7,7 @@ type CosmWasmClients = {
 class CosmWasmClientRouter {
   clients: CosmWasmClients = {}
 
-  async connect(rpcEndpoint) {
+  async connect(rpcEndpoint: string) {
     if (!this.getClientInstance(rpcEndpoint)) {
       this.setClientInstance(rpcEndpoint, CosmWasmClient.connect(rpcEndpoint))
     }
@@ -15,7 +15,7 @@ class CosmWasmClientRouter {
     return this.getClientInstance(rpcEndpoint)
   }
 
-  getClientInstance(rpcEndpoint) {
+  getClientInstance(rpcEndpoint: string) {
     return this.clients[rpcEndpoint]
   }
   setClientInstance(rpcEndpoint, client) {
