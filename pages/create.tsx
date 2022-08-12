@@ -52,36 +52,26 @@ const Create: NextPage = () => {
     setError("");
     setSuccess("");
     setLoading(true);
-    const amount: Coin[] = [
+    const amount = 
       {
         amount: convertDenomToMicroDenom(edgeAmount),
-        denom: PUBLIC_STAKING_DENOM,
-      },
-    ];
+      }
+    ;
 
     const txMessage = {
         create_edge: {
-          amount: amount,
+          amount,
           creditor: creditorAddress,
         },
       }
 
     signingClient
-    ?.execute(walletAddress, 
-        PUBLIC_CONTRACT_ADDRESS,
-        txMessage,
-        "auto"
-
-    )
-
-
+    ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto")
     // ?.sendTokens(walletAddress, creditorAddress, amount, "auto")
     .then((resp) => {
       console.log("resp", resp);
 
-      const message = `Success! You recorded a obligation of  ${edgeAmount}  ${convertFromMicroDenom(
-        PUBLIC_STAKING_DENOM
-      )} to ${creditorAddress}.`;
+      const message = `Success! You recorded a obligation of  ${edgeAmount}  to ${creditorAddress}.`;
 
       setLoadedAt(new Date());
       setLoading(false);
@@ -104,9 +94,9 @@ return (
       <div className="flex w-full max-w-xl">
         <input
           type="text"
-          id="recipient-address"
+          id="creditor-address"
           className="input input-bordered focus:input-primary input-lg rounded-full flex-grow font-mono text-center text-lg"
-          placeholder={`${PUBLIC_CHAIN_NAME} recipient wallet address...`}
+          placeholder={`${PUBLIC_CHAIN_NAME} creditor wallet address...`}
           onChange={(event) => setCreditorAddress(event.target.value)}
           value={creditorAddress}
         />
@@ -115,16 +105,13 @@ return (
         <div className="relative rounded-full shadow-sm md:mr-2">
           <input
             type="number"
-            id="send-amount"
+            id="edge-amount"
             className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
             placeholder="Amount..."
             step="0.1"
             onChange={(event) => setEdgeAmount(event.target.value)}
             value={edgeAmount}
           />
-          <span className="absolute top-0 right-0 bottom-0 px-4 py-5 rounded-r-full bg-secondary text-base-100 text-sm">
-            {convertFromMicroDenom(PUBLIC_STAKING_DENOM)}
-          </span>
         </div>
         <button
           className="mt-4 md:mt-0 btn btn-primary btn-lg font-semibold hover:text-base-100 text-2xl rounded-full flex-grow"
