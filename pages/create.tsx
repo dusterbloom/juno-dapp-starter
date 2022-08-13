@@ -69,8 +69,9 @@ const Create: NextPage = () => {
     // ?.sendTokens(walletAddress, creditorAddress, amount, "auto")
     .then((resp) => {
       console.log("resp", resp);
+      console.log("txHash"resp.transactionHash)
 
-      const message = `Success! You recorded a obligation of  ${edgeAmount}  to ${creditorAddress}.`;
+      const message = `Success! You recorded a obligation of  ${edgeAmount}  to ${creditorAddress} with the following transaction ${resp.transactionHash}.`;
 
       setLoadedAt(new Date());
       setLoading(false);
