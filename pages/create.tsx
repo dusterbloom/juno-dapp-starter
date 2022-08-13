@@ -8,6 +8,7 @@ import {
   convertMicroDenomToDenom,
   convertFromMicroDenom,
   convertDenomToMicroDenom,
+  convertToFixedDecimals,
 } from "util/conversion";
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
@@ -21,7 +22,7 @@ const Create: NextPage = () => {
   const [loadedAt, setLoadedAt] = useState(new Date());
   const [loading, setLoading] = useState(false);
   const [creditorAddress, setCreditorAddress] = useState("");
-  const [edgeAmount, setEdgeAmount] = useState("");
+  const [edgeAmount, setEdgeAmount] = useState(Number);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
@@ -52,20 +53,18 @@ const Create: NextPage = () => {
     setError("");
     setSuccess("");
     setLoading(true);
-    const amount = 
-      {
-        amount: convertDenomToMicroDenom(edgeAmount),
-      }
-    ;
+    const amount = edgeAmount;
+      
+    
 
     const txMessage = {
         create_edge: {
-          amount,
           creditor: creditorAddress,
+          amount
         },
-      }
+    };
 
-    signingClient
+  signingClient
     ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto")
     // ?.sendTokens(walletAddress, creditorAddress, amount, "auto")
     .then((resp) => {
@@ -75,7 +74,7 @@ const Create: NextPage = () => {
 
       setLoadedAt(new Date());
       setLoading(false);
-      setEdgeAmount("");
+      setEdgeAmount(Number);
       setSuccess(message);
     })
     .catch((error) => {
@@ -89,7 +88,7 @@ return (
       <p className="text-2xl">Your wallet has {balance}</p>
 
       <h1 className="text-5xl font-bold my-8">
-        Send to {PUBLIC_CHAIN_NAME} recipient wallet address:
+        Record an obligation to {PUBLIC_CHAIN_NAME} recipient wallet address:
       </h1>
       <div className="flex w-full max-w-xl">
         <input
@@ -109,7 +108,7 @@ return (
             className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
             placeholder="Amount..."
             step="0.1"
-            onChange={(event) => setEdgeAmount(event.target.value)}
+            onChange={(event) => setEdgeAmount(event.target.valueAsNumber)}
             value={edgeAmount}
           />
         </div>
