@@ -18,19 +18,7 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-
-    themes: [
-      {
-        junoDark: {
-          ...require("daisyui/src/colors/themes")["[data-theme=light]"],
-          primary: "blue",
-        },
-      },
-    ],
-  },
-
-
-    // themes: [require("./styles/daisyui-themes.json")],
+    themes: [require("./styles/daisyui-themes.json")],
    
     //themes: ["light", "dark", "cupcake", "bumblebee", "emerald", "corporate", "synthwave", "retro", "cyberpunk", "valentine", "halloween", "garden", "forest", "aqua", "lofi", "pastel", "fantasy", "wireframe", "black", "luxury", "dracula", "cmyk", "autumn", "business", "acid", "lemonade", "night", "coffee", "winter"],
     
