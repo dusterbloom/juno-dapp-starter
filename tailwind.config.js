@@ -19,5 +19,8 @@ module.exports = {
   plugins: [require("daisyui")],
   daisyui: {
     themes: [require("./styles/daisyui-themes.json")],    
+    primary: "blue",
+    "primary-focus": "mediumblue",
+
   },
 };
