@@ -35,12 +35,19 @@ function WalletLoader({
         </h1>
 
         <p className="mt-3 text-2xl">
-          Get started by installing{" "}
+          Here businesses save money by clearing their obligations together. {" "}
+          {/* 
           <a
             className="pl-1 link link-primary link-hover"
             href="https://keplr.app/"
           >
             Keplr wallet
+          </a> */}
+          <a
+            className="pl-1 link link-primary link-hover"
+            href="https://obligatto.app/how-it-works/#"
+          >
+          Pay what you owe with trade credit owed to you. 
           </a>
         </p>
 
@@ -51,7 +58,7 @@ function WalletLoader({
           >
             <h3 className="text-2xl font-bold">Connect your wallet &rarr;</h3>
             <p className="mt-4 text-xl">
-              Get your Keplr wallet connected now and start recording your obligations !
+              Connect your Keplr wallet and start clearing away your obligations!
             </p>
           </button>
         </div>
