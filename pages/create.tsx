@@ -15,8 +15,7 @@ import { networkInterfaces } from "os";
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
 const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg";
-const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg";
-
+const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM 
 const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm1aee5vz8pat4az3j32tsh004jneehewuq0n5u3j9nh36a0azu4z9smrsdgf";
 
 
@@ -62,7 +61,7 @@ const Create: NextPage = () => {
     setLoading(true);
     const amount = edgeAmount;
     // const memo = memoText;
-    const baseFee = amount / 1000 * 10;
+    const baseFee = amount / 10000000000 * 10;
     const dues = baseFee;
       
     const due: Coin[] = [
@@ -118,21 +117,18 @@ return (
           value={creditorAddress}
         />
       </div>
-      <p className="text-2xl">the following amount in {PUBLIC_FEE_DENOM}</p>
-
       <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
         <div className="relative rounded-full shadow-sm md:mr-2">
           <input
             type="number"
             id="edge-amount"
-            className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
+            className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg"
             placeholder="What you owe..."
-            step={1}
             onChange={(event) => setEdgeAmount(event.target.valueAsNumber)}
             value={edgeAmount}
           />
         </div>
-        <div className="flex flex-col md:flex-row mt-2 text-2xl w-full max-w-xl justify-between">
+        <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
         <div className="relative rounded-full shadow-sm md:mr-2">
           <input
             type="text"
