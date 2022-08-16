@@ -49,15 +49,15 @@ function WalletLoader({
             className="p-6 mt-6 text-left border border-secondary hover:border-primary w-96 rounded-xl hover:text-primary focus:text-primary-focus"
             onClick={connectWallet}
           >
-            <h3 className="text-2xl font-bold">Start &rarr;</h3>
+            <h3 className="text-2xl font-bold">Start now&rarr;</h3>
             <p className="mt-4 text-xl">
-              Connect your Keplr wallet and start clearing away your obligations!
+              Connect your wallet, upload your obligations, clearing will do the rest.
             </p>
           </button>
         </div>
       
         <p className="mt-3 text-2">
-          If you need a wallet, install {" "}   
+          If you don't have a wallet. Feel free to installing {" "}   
           <a
             className="pl-1 link link-primary link-hover"
             href="https://keplr.app/"
