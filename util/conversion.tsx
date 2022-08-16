@@ -27,6 +27,15 @@ export function convertToFixedDecimals(amount: number) {
   } else return String(amount);
 }
 
+export function convertToInteger(amount: number) {
+  if (typeof amount === "string") {
+    amount = Number(amount);
+  }
+  if (amount > 0.01) {
+    return amount.toFixed(1);
+  } else return String(amount);
+}
+
 export const zeroVotingCoin = {
   amount: "0",
   denom: "ucredits",

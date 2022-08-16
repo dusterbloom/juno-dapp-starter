@@ -1,4 +1,4 @@
-import { useState, useEffect, MouseEvent } from "react";
+import { useState, useEffect, MouseEvent, useDebugValue } from "react";
 import type { NextPage } from "next";
 import { StdFee, Coin } from "@cosmjs/amino";
 
@@ -10,9 +10,12 @@ import {
   convertDenomToMicroDenom,
   convertToFixedDecimals,
 } from "util/conversion";
+import { text } from "stream/consumers";
+import { networkInterfaces } from "os";
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
 const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg";
+const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM 
 const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm1aee5vz8pat4az3j32tsh004jneehewuq0n5u3j9nh36a0azu4z9smrsdgf";
 
 
@@ -23,6 +26,9 @@ const Create: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [creditorAddress, setCreditorAddress] = useState("");
   const [edgeAmount, setEdgeAmount] = useState(Number);
+  const [due, setDue] = useState();
+  const [memo, setMemo] = useState("");
+
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
@@ -54,8 +60,16 @@ const Create: NextPage = () => {
     setSuccess("");
     setLoading(true);
     const amount = edgeAmount;
+    // const memo = memoText;
+    const baseFee = amount / 10000000000 ;
+    const dues = baseFee;
       
-    
+    const due: Coin[] = [
+      {
+        amount: convertDenomToMicroDenom(dues),
+        denom: PUBLIC_STAKING_DENOM,
+      },
+    ];
 
     const txMessage = {
         create_edge: {
@@ -65,17 +79,19 @@ const Create: NextPage = () => {
     };
 
   signingClient
-    ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto")
-    // ?.sendTokens(walletAddress, creditorAddress, amount, "auto")
+    ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto", memo, due)
     .then((resp) => {
       console.log("resp", resp);
       console.log("txHash", resp.transactionHash)
+      // console.log("fees", resp.)
 
       const message = `Success! You recorded a obligation of  ${edgeAmount}  to ${creditorAddress} with the following transaction ${resp.transactionHash}.`;
 
       setLoadedAt(new Date());
       setLoading(false);
       setEdgeAmount(Number);
+      setMemo("");
+      // setDue(due);
       setSuccess(message);
     })
     .catch((error) => {
@@ -89,7 +105,7 @@ return (
       <p className="text-2xl">Your wallet has {balance}</p>
 
       <h1 className="text-5xl font-bold my-8">
-        Record an obligation to {PUBLIC_CHAIN_NAME} recipient wallet address:
+        Record an obligation to pay
       </h1>
       <div className="flex w-full max-w-xl">
         <input
@@ -106,19 +122,42 @@ return (
           <input
             type="number"
             id="edge-amount"
-            className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
-            placeholder="Amount..."
-            step="0.1"
+            className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg"
+            placeholder="What you owe..."
             onChange={(event) => setEdgeAmount(event.target.valueAsNumber)}
             value={edgeAmount}
           />
         </div>
+        <div className="flex-auto  md:flex-row text-2xl w-full max-w-xl justify-between">
+        <div className="relative rounded-full shadow-sm md:mr-2">
+          <input
+            type="text"
+            id="memo"
+            className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
+            placeholder="memo..."
+            onChange={(event) => setMemo(event.target.value)}
+            value={memo}
+          />
+        </div>
+        {/* <div className="relative rounded-full shadow-sm md:mr-2">
+          <input
+            type="text"
+            id="due"
+            className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
+            placeholder="Fees..."
+            onChange={(event) => setDue(event.target.value)}
+            value={}
+          />
+        </div> */}
+        </div>
+        <div>
         <button
           className="mt-4 md:mt-0 btn btn-primary btn-lg font-semibold hover:text-base-100 text-2xl rounded-full flex-grow"
           onClick={handleCreate}
         >
           CREATE
         </button>
+        </div>
       </div>
       <div className="mt-4 flex flex-col w-full max-w-xl">
         {success.length > 0 && (
