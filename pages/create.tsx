@@ -61,7 +61,7 @@ const Create: NextPage = () => {
     setLoading(true);
     const amount = edgeAmount;
     // const memo = memoText;
-    const baseFee = amount / 10000000000 ;
+    const baseFee = amount / 1000000 ;
     const dues = baseFee;
       
     const due: Coin[] = [
@@ -107,6 +107,7 @@ return (
       <h1 className="text-5xl font-bold my-8">
         Record an obligation to pay
       </h1>
+
       <div className="flex w-full max-w-xl">
         <input
           type="text"
@@ -117,7 +118,9 @@ return (
           value={creditorAddress}
         />
       </div>
+
       <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
+
         <div className="relative rounded-full shadow-sm md:mr-2">
           <input
             type="number"
@@ -128,8 +131,19 @@ return (
             value={edgeAmount}
           />
         </div>
-        <div className="flex-auto  md:flex-row text-2xl w-full max-w-xl justify-between">
-        <div className="relative rounded-full shadow-sm md:mr-2">
+
+         
+        
+        <button
+          className="mt-4 md:mt-0 btn btn-primary btn-lg font-semibold hover:text-base-100 text-2xl rounded-full flex-grow"
+          onClick={handleCreate}
+        >
+          CREATE
+        </button>
+      
+      </div>
+      
+      <div className="flex w-full max-w-xl md:flex-row mt-4">
           <input
             type="text"
             id="memo"
@@ -139,26 +153,7 @@ return (
             value={memo}
           />
         </div>
-        {/* <div className="relative rounded-full shadow-sm md:mr-2">
-          <input
-            type="text"
-            id="due"
-            className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
-            placeholder="Fees..."
-            onChange={(event) => setDue(event.target.value)}
-            value={}
-          />
-        </div> */}
-        </div>
-        <div>
-        <button
-          className="mt-4 md:mt-0 btn btn-primary btn-lg font-semibold hover:text-base-100 text-2xl rounded-full flex-grow"
-          onClick={handleCreate}
-        >
-          CREATE
-        </button>
-        </div>
-      </div>
+
       <div className="mt-4 flex flex-col w-full max-w-xl">
         {success.length > 0 && (
           <div className="alert alert-success">
