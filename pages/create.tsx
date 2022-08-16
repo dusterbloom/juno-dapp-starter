@@ -128,7 +128,7 @@ return (
             value={edgeAmount}
           />
         </div>
-        <div className="flex-auto flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
+        <div className="flex-auto  md:flex-row text-2xl w-full max-w-xl justify-between">
         <div className="relative rounded-full shadow-sm md:mr-2">
           <input
             type="text"
