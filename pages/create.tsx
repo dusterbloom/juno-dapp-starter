@@ -11,9 +11,12 @@ import {
   convertToFixedDecimals,
 } from "util/conversion";
 import { text } from "stream/consumers";
+import { networkInterfaces } from "os";
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
 const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg";
+const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg";
+
 const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm1aee5vz8pat4az3j32tsh004jneehewuq0n5u3j9nh36a0azu4z9smrsdgf";
 
 
@@ -103,7 +106,7 @@ return (
       <p className="text-2xl">Your wallet has {balance}</p>
 
       <h1 className="text-5xl font-bold my-8">
-        Record an obligation to {PUBLIC_CHAIN_NAME} recipient wallet address:
+        Record an obligation to pay
       </h1>
       <div className="flex w-full max-w-xl">
         <input
@@ -115,19 +118,21 @@ return (
           value={creditorAddress}
         />
       </div>
+      <p className="text-2xl">the following amount in {PUBLIC_FEE_DENOM}</p>
+
       <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
         <div className="relative rounded-full shadow-sm md:mr-2">
           <input
             type="number"
             id="edge-amount"
             className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
-            placeholder="Amount..."
-            step="0.1"
+            placeholder="What you owe..."
+            step={1}
             onChange={(event) => setEdgeAmount(event.target.valueAsNumber)}
             value={edgeAmount}
           />
         </div>
-        <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
+        <div className="flex flex-col md:flex-row mt-2 text-2xl w-full max-w-xl justify-between">
         <div className="relative rounded-full shadow-sm md:mr-2">
           <input
             type="text"
