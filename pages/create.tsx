@@ -61,7 +61,7 @@ const Create: NextPage = () => {
     setLoading(true);
     const amount = edgeAmount;
     // const memo = memoText;
-    const baseFee = amount / 10000000000 * 10;
+    const baseFee = amount / 10000000000 ;
     const dues = baseFee;
       
     const due: Coin[] = [
@@ -128,7 +128,7 @@ return (
             value={edgeAmount}
           />
         </div>
-        <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
+        <div className="flex-auto flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
         <div className="relative rounded-full shadow-sm md:mr-2">
           <input
             type="text"
@@ -149,7 +149,8 @@ return (
             value={}
           />
         </div> */}
-
+        </div>
+        <div>
         <button
           className="mt-4 md:mt-0 btn btn-primary btn-lg font-semibold hover:text-base-100 text-2xl rounded-full flex-grow"
           onClick={handleCreate}
