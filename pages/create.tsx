@@ -143,7 +143,7 @@ return (
       
       </div>
       
-      <div className="flex w-full max-w-xl">
+      <div className="flex w-full max-w-xl md:flex-row mt-4">
           <input
             type="text"
             id="memo"
