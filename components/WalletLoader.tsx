@@ -57,7 +57,7 @@ function WalletLoader({
         </div>
       
         <p className="mt-3 text-2">
-          If you don't have a wallet. Feel free to installing {" "}   
+          If you don't have a wallet. We recommend installing{" "}   
           <a
             className="pl-1 link link-primary link-hover"
             href="https://keplr.app/"
