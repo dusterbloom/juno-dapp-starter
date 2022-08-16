@@ -29,7 +29,7 @@ function WalletLoader({
       <div className="max-w-full">
         <h1 className="text-6xl font-bold">
           Welcome to{" "}
-          <a className="link link-primary link-hover" href="https://nextjs.org">
+          <a className="link link-primary link-hover" href="https://informal.systems/CoFi/Obligatto/#">
             Obligatto!
           </a>
         </h1>
@@ -51,7 +51,7 @@ function WalletLoader({
           >
             <h3 className="text-2xl font-bold">Connect your wallet &rarr;</h3>
             <p className="mt-4 text-xl">
-              Get your Keplr wallet connected now and start working !
+              Get your Keplr wallet connected now and start recording your obligations !
             </p>
           </button>
         </div>

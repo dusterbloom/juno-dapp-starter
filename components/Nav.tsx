@@ -27,7 +27,7 @@ function Nav() {
     };
   }, [reconnect]);
 
-  const PUBLIC_SITE_ICON_URL = process.env.NEXT_PUBLIC_SITE_ICON_URL || "";
+  const PUBLIC_SITE_ICON_URL = process.env.NEXT_PUBLIC_SITE_ICON_URL || "/public/favicon_tiny.ico";
 
   return (
     <div className="border-b w-screen px-2 md:px-16">

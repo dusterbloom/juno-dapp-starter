@@ -23,9 +23,9 @@ const Home: NextPage = () => {
       <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 max-w-full sm:w-full">
         <Link href="/send" passHref>
           <a className="p-6 mt-6 text-left border border-secondary hover:border-primary w-96 rounded-xl hover:text-primary focus:text-primary-focus">
-            <h3 className="text-2xl font-bold">Send to wallet &rarr;</h3>
+            <h3 className="text-2xl font-bold">Transfer to wallet &rarr;</h3>
             <p className="mt-4 text-xl">
-              Execute a transaction to send funds to a wallet address.
+              Execute a transaction to send funds to a wallet or contract address.
             </p>
           </a>
         </Link>
@@ -37,7 +37,7 @@ const Home: NextPage = () => {
       <a className="p-6 mt-6 text-left border border-secondary hover:border-primary w-96 rounded-xl hover:text-primary focus:text-primary-focus">
         <h3 className="text-2xl font-bold">Record an obligation &rarr;</h3>
         <p className="mt-4 text-xl">
-          Record a debt or an obligation owed to another user.
+          Record a debt you owe to another wallet.
         </p>
       </a>
     </Link>
