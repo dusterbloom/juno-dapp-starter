@@ -61,12 +61,7 @@ const Create: NextPage = () => {
       });
   }, [signingClient, walletAddress, loadedAt]);
 
-  useEffect(() => {
-    if (!signingClient || walletAddress.length === 0) {
-      return;
-    }
-    setError("");
-    setSuccess("");
+
     const QueryMsg = {
       get_denom: {}
     }
@@ -84,7 +79,6 @@ const Create: NextPage = () => {
       setError(`Error! ${error.message}`);
       console.log("Error signingClient.execute(): ", error);
     });
-  }, [signingClient, walletAddress, loadedAt]);
 
   const handleCreate = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -162,7 +156,8 @@ return (
             value={edgeAmount}
           />
            <span className="absolute top-0 right-0 bottom-0 px-4 py-5 rounded-r-full bg-secondary text-base-100 text-sm">
-           {denom}
+           {convertFromMicroDenom(denom)}
+
           </span>
         </div>
 
