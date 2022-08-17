@@ -16,6 +16,7 @@ import { networkInterfaces } from "os";
 
 
 import { CosmWasmClient, SigningCosmWasmClient, ExecuteResult } from "@cosmjs/cosmwasm-stargate";
+import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event";
 // import { Batch, DenomResponse, Addr, Edge, ExecuteMsg, InstantiateMsg, Network, QueryMsg } from "util/ts/Obligatto2.types.js";
 // import { Obligatto2Client } from "util/ts/Obligatto2.client";
 
@@ -72,8 +73,8 @@ const Create: NextPage = () => {
   signingClient
   ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg)
   .then((response) => {
-    console.log("denom", response.toUpperCase);
-    setDenom(`${response.denom}`);
+    console.log("denom", response);
+    setDenom(`${response}`);
     //const denomB = $(response.de)
     // setSuccess(denom);
   })
@@ -160,7 +161,7 @@ return (
             value={edgeAmount}
           />
            <span className="absolute top-0 right-0 bottom-0 px-4 py-5 rounded-r-full bg-secondary text-base-100 text-sm">
-           {setDenom}
+           {denom}
 
           </span>
         </div>
