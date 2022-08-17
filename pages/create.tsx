@@ -149,6 +149,17 @@ return (
         />
       </div>
 
+      <div className="flex w-full max-w-xl md:flex-row mt-4">
+          <input
+            type="text"
+            id="memo"
+            className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
+            placeholder="memo..."
+            onChange={(event) => setMemo(event.target.value)}
+            value={memo}
+          />
+        </div>
+
       <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
 
         <div className="relative rounded-full shadow-sm md:mr-2">
@@ -162,7 +173,7 @@ return (
             value={edgeAmount}
           />
            <span className="absolute top-0 right-0 bottom-0 px-4 py-5 rounded-r-full bg-secondary text-base-100 text-sm">
-           {denom}
+           {denom.toUpperCase}
 
           </span>
         </div>
@@ -178,16 +189,7 @@ return (
       
       </div>
       
-      <div className="flex w-full max-w-xl md:flex-row mt-4">
-          <input
-            type="text"
-            id="memo"
-            className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
-            placeholder="memo..."
-            onChange={(event) => setMemo(event.target.value)}
-            value={memo}
-          />
-        </div>
+      
 
       <div className="mt-4 flex flex-col w-full max-w-xl">
         {success.length > 0 && (
