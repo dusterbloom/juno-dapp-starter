@@ -5,10 +5,10 @@
 */
 
 import { UseQueryOptions, useQuery } from "react-query";
-import { Batch, DenomResponse, Addr, Edge, ExecuteMsg, InstantiateMsg, Network, QueryMsg } from "./Obligatto2.types";
-import { Obligatto2QueryClient } from "./Obligatto2.client";
+import { Batch, DenomResponse, Addr, Edge, ExecuteMsg, InstantiateMsg, Network, QueryMsg } from "./Obligatto2.types.js";
+import { Obligatto2QueryClient } from "./Obligatto2.client.js";
 export interface Obligatto2ReactQuery<TResponse> {
-  client: Obligatto2QueryClient;
+  client: Obligatto2QueryClient | undefined;
   options?: UseQueryOptions<TResponse, Error, TResponse, (string | undefined)[]>;
 }
 export interface Obligatto2GetTotalDebtQuery extends Obligatto2ReactQuery<GetTotalDebtResponse> {}
@@ -16,7 +16,9 @@ export function useObligatto2GetTotalDebtQuery({
   client,
   options
 }: Obligatto2GetTotalDebtQuery) {
-  return useQuery<GetTotalDebtResponse, Error, GetTotalDebtResponse, (string | undefined)[]>(["obligatto2GetTotalDebt", client.contractAddress], () => client.getTotalDebt(), options);
+  return useQuery<GetTotalDebtResponse, Error, GetTotalDebtResponse, (string | undefined)[]>(["obligatto2GetTotalDebt", client?.contractAddress], () => client ? client.getTotalDebt() : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
 export interface Obligatto2GetTotalDebtByGraphQuery extends Obligatto2ReactQuery<GetTotalDebtByGraphResponse> {
   args: {
@@ -28,9 +30,11 @@ export function useObligatto2GetTotalDebtByGraphQuery({
   args,
   options
 }: Obligatto2GetTotalDebtByGraphQuery) {
-  return useQuery<GetTotalDebtByGraphResponse, Error, GetTotalDebtByGraphResponse, (string | undefined)[]>(["obligatto2GetTotalDebtByGraph", client.contractAddress, JSON.stringify(args)], () => client.getTotalDebtByGraph({
+  return useQuery<GetTotalDebtByGraphResponse, Error, GetTotalDebtByGraphResponse, (string | undefined)[]>(["obligatto2GetTotalDebtByGraph", client?.contractAddress, JSON.stringify(args)], () => client ? client.getTotalDebtByGraph({
     graphId: args.graphId
-  }), options);
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
 export interface Obligatto2GetTotalCreditPerAddressQuery extends Obligatto2ReactQuery<GetTotalCreditPerAddressResponse> {
   args: {
@@ -42,9 +46,11 @@ export function useObligatto2GetTotalCreditPerAddressQuery({
   args,
   options
 }: Obligatto2GetTotalCreditPerAddressQuery) {
-  return useQuery<GetTotalCreditPerAddressResponse, Error, GetTotalCreditPerAddressResponse, (string | undefined)[]>(["obligatto2GetTotalCreditPerAddress", client.contractAddress, JSON.stringify(args)], () => client.getTotalCreditPerAddress({
+  return useQuery<GetTotalCreditPerAddressResponse, Error, GetTotalCreditPerAddressResponse, (string | undefined)[]>(["obligatto2GetTotalCreditPerAddress", client?.contractAddress, JSON.stringify(args)], () => client ? client.getTotalCreditPerAddress({
     address: args.address
-  }), options);
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
 export interface Obligatto2GetTotalDebtPerAddressQuery extends Obligatto2ReactQuery<GetTotalDebtPerAddressResponse> {
   args: {
@@ -56,9 +62,11 @@ export function useObligatto2GetTotalDebtPerAddressQuery({
   args,
   options
 }: Obligatto2GetTotalDebtPerAddressQuery) {
-  return useQuery<GetTotalDebtPerAddressResponse, Error, GetTotalDebtPerAddressResponse, (string | undefined)[]>(["obligatto2GetTotalDebtPerAddress", client.contractAddress, JSON.stringify(args)], () => client.getTotalDebtPerAddress({
+  return useQuery<GetTotalDebtPerAddressResponse, Error, GetTotalDebtPerAddressResponse, (string | undefined)[]>(["obligatto2GetTotalDebtPerAddress", client?.contractAddress, JSON.stringify(args)], () => client ? client.getTotalDebtPerAddress({
     address: args.address
-  }), options);
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
 export interface Obligatto2GetEdgesAsCounterpartyQuery extends Obligatto2ReactQuery<GetEdgesAsCounterpartyResponse> {
   args: {
@@ -70,9 +78,11 @@ export function useObligatto2GetEdgesAsCounterpartyQuery({
   args,
   options
 }: Obligatto2GetEdgesAsCounterpartyQuery) {
-  return useQuery<GetEdgesAsCounterpartyResponse, Error, GetEdgesAsCounterpartyResponse, (string | undefined)[]>(["obligatto2GetEdgesAsCounterparty", client.contractAddress, JSON.stringify(args)], () => client.getEdgesAsCounterparty({
+  return useQuery<GetEdgesAsCounterpartyResponse, Error, GetEdgesAsCounterpartyResponse, (string | undefined)[]>(["obligatto2GetEdgesAsCounterparty", client?.contractAddress, JSON.stringify(args)], () => client ? client.getEdgesAsCounterparty({
     address: args.address
-  }), options);
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
 export interface Obligatto2GetEdgesByAddressQuery extends Obligatto2ReactQuery<GetEdgesByAddressResponse> {
   args: {
@@ -84,9 +94,11 @@ export function useObligatto2GetEdgesByAddressQuery({
   args,
   options
 }: Obligatto2GetEdgesByAddressQuery) {
-  return useQuery<GetEdgesByAddressResponse, Error, GetEdgesByAddressResponse, (string | undefined)[]>(["obligatto2GetEdgesByAddress", client.contractAddress, JSON.stringify(args)], () => client.getEdgesByAddress({
+  return useQuery<GetEdgesByAddressResponse, Error, GetEdgesByAddressResponse, (string | undefined)[]>(["obligatto2GetEdgesByAddress", client?.contractAddress, JSON.stringify(args)], () => client ? client.getEdgesByAddress({
     address: args.address
-  }), options);
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
 export interface Obligatto2OneGraphQuery extends Obligatto2ReactQuery<OneGraphResponse> {
   args: {
@@ -98,9 +110,11 @@ export function useObligatto2OneGraphQuery({
   args,
   options
 }: Obligatto2OneGraphQuery) {
-  return useQuery<OneGraphResponse, Error, OneGraphResponse, (string | undefined)[]>(["obligatto2OneGraph", client.contractAddress, JSON.stringify(args)], () => client.oneGraph({
+  return useQuery<OneGraphResponse, Error, OneGraphResponse, (string | undefined)[]>(["obligatto2OneGraph", client?.contractAddress, JSON.stringify(args)], () => client ? client.oneGraph({
     graphId: args.graphId
-  }), options);
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
 export interface Obligatto2OneBatchQuery extends Obligatto2ReactQuery<OneBatchResponse> {
   args: {
@@ -112,9 +126,11 @@ export function useObligatto2OneBatchQuery({
   args,
   options
 }: Obligatto2OneBatchQuery) {
-  return useQuery<OneBatchResponse, Error, OneBatchResponse, (string | undefined)[]>(["obligatto2OneBatch", client.contractAddress, JSON.stringify(args)], () => client.oneBatch({
+  return useQuery<OneBatchResponse, Error, OneBatchResponse, (string | undefined)[]>(["obligatto2OneBatch", client?.contractAddress, JSON.stringify(args)], () => client ? client.oneBatch({
     batchId: args.batchId
-  }), options);
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
 export interface Obligatto2OneEdgeQuery extends Obligatto2ReactQuery<OneEdgeResponse> {
   args: {
@@ -126,28 +142,36 @@ export function useObligatto2OneEdgeQuery({
   args,
   options
 }: Obligatto2OneEdgeQuery) {
-  return useQuery<OneEdgeResponse, Error, OneEdgeResponse, (string | undefined)[]>(["obligatto2OneEdge", client.contractAddress, JSON.stringify(args)], () => client.oneEdge({
+  return useQuery<OneEdgeResponse, Error, OneEdgeResponse, (string | undefined)[]>(["obligatto2OneEdge", client?.contractAddress, JSON.stringify(args)], () => client ? client.oneEdge({
     edgeId: args.edgeId
-  }), options);
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
 export interface Obligatto2AllEdgesQuery extends Obligatto2ReactQuery<AllEdgesResponse> {}
 export function useObligatto2AllEdgesQuery({
   client,
   options
 }: Obligatto2AllEdgesQuery) {
-  return useQuery<AllEdgesResponse, Error, AllEdgesResponse, (string | undefined)[]>(["obligatto2AllEdges", client.contractAddress], () => client.allEdges(), options);
+  return useQuery<AllEdgesResponse, Error, AllEdgesResponse, (string | undefined)[]>(["obligatto2AllEdges", client?.contractAddress], () => client ? client.allEdges() : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
 export interface Obligatto2GetOwnerQuery extends Obligatto2ReactQuery<GetOwnerResponse> {}
 export function useObligatto2GetOwnerQuery({
   client,
   options
 }: Obligatto2GetOwnerQuery) {
-  return useQuery<GetOwnerResponse, Error, GetOwnerResponse, (string | undefined)[]>(["obligatto2GetOwner", client.contractAddress], () => client.getOwner(), options);
+  return useQuery<GetOwnerResponse, Error, GetOwnerResponse, (string | undefined)[]>(["obligatto2GetOwner", client?.contractAddress], () => client ? client.getOwner() : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
 export interface Obligatto2GetDenomQuery extends Obligatto2ReactQuery<GetDenomResponse> {}
 export function useObligatto2GetDenomQuery({
   client,
   options
 }: Obligatto2GetDenomQuery) {
-  return useQuery<GetDenomResponse, Error, GetDenomResponse, (string | undefined)[]>(["obligatto2GetDenom", client.contractAddress], () => client.getDenom(), options);
+  return useQuery<GetDenomResponse, Error, GetDenomResponse, (string | undefined)[]>(["obligatto2GetDenom", client?.contractAddress], () => client ? client.getDenom() : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
 }
