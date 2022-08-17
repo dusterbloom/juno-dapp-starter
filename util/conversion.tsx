@@ -18,6 +18,10 @@ export function convertFromMicroDenom(denom: string) {
   return denom?.substring(1).toUpperCase();
 }
 
+export function convertFromDenom(denom: string) {
+  return denom.toUpperCase();
+}
+
 export function convertToFixedDecimals(amount: number) {
   if (typeof amount === "string") {
     amount = Number(amount);
