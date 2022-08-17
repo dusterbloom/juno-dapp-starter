@@ -73,8 +73,8 @@ const Create: NextPage = () => {
   signingClient
   ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg)
   .then((response) => {
-    console.log("denom", response);
-    setDenom(`${response}`);
+    console.log("denom", response.denom);
+    setDenom(`${response.denom}`);
     //const denomB = $(response.de)
     // setSuccess(denom);
   })
