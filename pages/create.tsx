@@ -91,7 +91,7 @@ const Create: NextPage = () => {
     setLoading(true);
 
     const amount = edgeAmount;
-    const baseFee = convertMicroDenomToDenom(amount);
+    const baseFee = convertMicroDenomToDenom(edgeAmount);
     const dues = baseFee;
       
     const due: Coin[] = [
@@ -115,7 +115,7 @@ const Create: NextPage = () => {
       console.log("resp", resp);
       console.log("txHash", resp.transactionHash)
 
-      const message = `Success! You've just recorded a obligation to pay ${creditorAddress} a total of ${edgeAmount} ${denom}. TransactionHash ${resp.transactionHash}.`;
+      const message = `Success! You've just recorded a obligation to pay ${creditorAddress} a total of ${edgeAmount} ${denom}. TransactionHash ${resp.transactionHash}`;
 
       setLoadedAt(new Date());
       setLoading(false);
@@ -144,7 +144,7 @@ return (
           id="creditor-address"
           className="input input-bordered focus:input-primary input-lg rounded-full flex-grow font-mono text-center text-lg"
           // placeholder={`${PUBLIC_CHAIN_NAME} creditor wallet address...`}
-          placeholder={"Creditor address"}
+          placeholder="Creditor address"
 
           onChange={(event) => setCreditorAddress(event.target.value)}
           value={creditorAddress}
@@ -156,7 +156,7 @@ return (
             type="text"
             id="memo"
             className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
-            placeholder={"Public transaction memo"}
+            placeholder="Public transaction memo"
             onChange={(event) => setMemo(event.target.value)}
             value={memo}
           />
@@ -169,7 +169,7 @@ return (
             type="number"
             id="edge-amount"
             className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg"
-            placeholder={"Amount"}
+            placeholder="Amount"
             step="0.1"
             onChange={(event) => setEdgeAmount(event.target.value)}
             value={edgeAmount}
