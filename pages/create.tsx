@@ -115,7 +115,7 @@ const Create: NextPage = () => {
       console.log("resp", resp);
       console.log("txHash", resp.transactionHash)
 
-      const message = `Success! You recorded a obligation of  ${edgeAmount}  to ${creditorAddress} with the following transaction ${resp.transactionHash}.`;
+      const message = `Success! You recorded a obligation to pay ${edgeAmount} ${denom} to ${creditorAddress} with the following transaction ${resp.transactionHash}.`;
 
       setLoadedAt(new Date());
       setLoading(false);
@@ -143,7 +143,9 @@ return (
           type="text"
           id="creditor-address"
           className="input input-bordered focus:input-primary input-lg rounded-full flex-grow font-mono text-center text-lg"
-          placeholder={`${PUBLIC_CHAIN_NAME} creditor address...`}
+          // placeholder={`${PUBLIC_CHAIN_NAME} creditor address...`}
+          placeholder={`Creditor address`}
+
           onChange={(event) => setCreditorAddress(event.target.value)}
           value={creditorAddress}
         />
@@ -154,7 +156,7 @@ return (
             type="text"
             id="memo"
             className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
-            placeholder="Public transaction memo..."
+            placeholder="Public transaction memo"
             onChange={(event) => setMemo(event.target.value)}
             value={memo}
           />
@@ -167,7 +169,7 @@ return (
             type="number"
             id="edge-amount"
             className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg"
-            placeholder={"Amount you owe..."}
+            placeholder={"Amount owed"}
             onChange={(event) => setEdgeAmount(event.target.valueAsNumber)}
             value={edgeAmount}
           />
