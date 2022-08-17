@@ -9,6 +9,7 @@ import {
   convertFromMicroDenom,
   convertDenomToMicroDenom,
   convertToFixedDecimals,
+  convertFromDenom,
 } from "util/conversion";
 import { text } from "stream/consumers";
 import { networkInterfaces } from "os";
