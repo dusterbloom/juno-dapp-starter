@@ -13,6 +13,13 @@ import {
 import { text } from "stream/consumers";
 import { networkInterfaces } from "os";
 
+
+import { CosmWasmClient, SigningCosmWasmClient, ExecuteResult } from "@cosmjs/cosmwasm-stargate";
+import { Batch, DenomResponse, Addr, Edge, ExecuteMsg, InstantiateMsg, Network, QueryMsg } from "util/ts/Obligatto2.types.js";
+import { Obligatto2Client } from "util/ts/Obligatto2.client";
+import { getDenomSelector } from "util/ts/Obligatto2.recoil";
+import { useObligatto2GetDenomQuery } from "util/ts/Obligatto2.react-query";
+
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
 const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg";
 const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM 
@@ -28,6 +35,8 @@ const Create: NextPage = () => {
   const [edgeAmount, setEdgeAmount] = useState(Number);
   const [due, setDue] = useState();
   const [memo, setMemo] = useState("");
+  const [denom] = useState("");
+
 
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
@@ -59,8 +68,8 @@ const Create: NextPage = () => {
     setError("");
     setSuccess("");
     setLoading(true);
+
     const amount = edgeAmount;
-    // const memo = memoText;
     const baseFee = amount / 1000000 ;
     const dues = baseFee;
       
@@ -78,12 +87,28 @@ const Create: NextPage = () => {
         },
     };
 
+    const QueryMsg = {
+      get_denom: {}
+    }
+  signingClient
+    ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg)
+    .then((denom) => {
+      console.log("denom", denom);
+
+     
+    })
+    .catch((error) => {
+      setLoading(false);
+      setError(`Error! ${error.message}`);
+      console.log("Error signingClient.execute(): ", error);
+    });
+
+
   signingClient
     ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto", memo, due)
     .then((resp) => {
       console.log("resp", resp);
       console.log("txHash", resp.transactionHash)
-      // console.log("fees", resp.)
 
       const message = `Success! You recorded a obligation of  ${edgeAmount}  to ${creditorAddress} with the following transaction ${resp.transactionHash}.`;
 
@@ -126,10 +151,13 @@ return (
             type="number"
             id="edge-amount"
             className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg"
-            placeholder="What you owe..."
+            placeholder={"What you owe..."}
             onChange={(event) => setEdgeAmount(event.target.valueAsNumber)}
             value={edgeAmount}
           />
+           <span className="absolute top-0 right-0 bottom-0 px-4 py-5 rounded-r-full bg-secondary text-base-100 text-sm">
+           {denom}
+          </span>
         </div>
 
          
