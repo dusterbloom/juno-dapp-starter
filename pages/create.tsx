@@ -115,7 +115,7 @@ const Create: NextPage = () => {
       console.log("resp", resp);
       console.log("txHash", resp.transactionHash)
 
-      const message = `Success! You recorded a obligation to pay ${creditorAddress} a total of ${edgeAmount} ${denom}. TransactionHash ${resp.transactionHash}.`;
+      const message = `Success! You've just recorded a obligation to pay ${creditorAddress} a total of ${edgeAmount} ${denom}. TransactionHash ${resp.transactionHash}.`;
 
       setLoadedAt(new Date());
       setLoading(false);
@@ -143,7 +143,9 @@ return (
           type="text"
           id="creditor-address"
           className="input input-bordered focus:input-primary input-lg rounded-full flex-grow font-mono text-center text-lg"
-          placeholder={`${PUBLIC_CHAIN_NAME} creditor wallet address...`}
+          // placeholder={`${PUBLIC_CHAIN_NAME} creditor wallet address...`}
+          placeholder={"Creditor address"}
+
           onChange={(event) => setCreditorAddress(event.target.value)}
           value={creditorAddress}
         />
@@ -154,7 +156,7 @@ return (
             type="text"
             id="memo"
             className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg "
-            placeholder="memo..."
+            placeholder={"Public transaction memo"}
             onChange={(event) => setMemo(event.target.value)}
             value={memo}
           />
@@ -167,13 +169,13 @@ return (
             type="number"
             id="edge-amount"
             className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg"
-            placeholder={"What you owe..."}
+            placeholder={"Amount"}
             step="0.1"
             onChange={(event) => setEdgeAmount(event.target.value)}
             value={edgeAmount}
           />
            <span className="absolute top-0 right-0 bottom-0 px-4 py-5 rounded-r-full bg-secondary text-base-100 text-sm">
-           {denom.toUpperCase}
+           {denom.toUpperCase()}
 
           </span>
         </div>
@@ -184,7 +186,7 @@ return (
           className="mt-4 md:mt-0 btn btn-primary btn-lg font-semibold hover:text-base-100 text-2xl rounded-full flex-grow"
           onClick={handleCreate}
         >
-          CREATE
+          RECORD
         </button>
       
       </div>
