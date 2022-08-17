@@ -34,7 +34,7 @@ const Create: NextPage = () => {
   const [edgeAmount, setEdgeAmount] = useState(Number);
   const [due, setDue] = useState();
   const [memo, setMemo] = useState("");
-  const [denom] = useState("");
+  const [denom,setDenom] = useState("");
 
 
   const [success, setSuccess] = useState("");
@@ -61,6 +61,30 @@ const Create: NextPage = () => {
       });
   }, [signingClient, walletAddress, loadedAt]);
 
+  useEffect(() => {
+    if (!signingClient || walletAddress.length === 0) {
+      return;
+    }
+    setError("");
+    setSuccess("");
+    const QueryMsg = {
+      get_denom: {}
+    }
+ 
+    signingClient
+    ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg)
+    .then((response) => {
+      console.log("denom", response);
+      setDenom(response);
+      
+     
+    })
+    .catch((error) => {
+      setLoading(false);
+      setError(`Error! ${error.message}`);
+      console.log("Error signingClient.execute(): ", error);
+    });
+  }, [signingClient, walletAddress, loadedAt]);
 
   const handleCreate = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -85,23 +109,6 @@ const Create: NextPage = () => {
           amount
         },
     };
-
-    const QueryMsg = {
-      get_denom: {}
-    }
-  signingClient
-    ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg)
-    .then((denom) => {
-      console.log("denom", denom);
-
-     
-    })
-    .catch((error) => {
-      setLoading(false);
-      setError(`Error! ${error.message}`);
-      console.log("Error signingClient.execute(): ", error);
-    });
-
 
   signingClient
     ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto", memo, due)
