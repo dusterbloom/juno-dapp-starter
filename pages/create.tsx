@@ -72,7 +72,7 @@ const Create: NextPage = () => {
   signingClient
   ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg)
   .then((response) => {
-    console.log("denom", response.toUpperCase());
+    console.log("denom", response.toUpperCase);
     setDenom(`${response.denom}`);
     //const denomB = $(response.de)
     // setSuccess(denom);
