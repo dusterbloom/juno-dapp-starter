@@ -59,23 +59,7 @@ const Create: NextPage = () => {
         setError(`Error! ${error.message}`);
         console.log("Error signingClient.getBalance(): ", error);
       });
-      const QueryMsg = {
-        get_denom: {}
-      }
-   
-      signingClient
-      ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg)
-      .then((response) => {
-        console.log("denom", response);
-        setDenom(response);
-        
-       
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(`Error! ${error.message}`);
-        console.log("Error signingClient.execute(): ", error);
-      });
+      
   
 
   }, [signingClient, walletAddress, loadedAt]);
@@ -105,6 +89,23 @@ const Create: NextPage = () => {
           amount
         },
     };
+    const QueryMsg = {
+      get_denom: {}
+    }
+ 
+    signingClient
+    ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg)
+    .then((response) => {
+      console.log("denom", response);
+      setDenom(response);
+      
+     
+    })
+    .catch((error) => {
+      setLoading(false);
+      setError(`Error! ${error.message}`);
+      console.log("Error signingClient.execute(): ", error);
+    });
 
   signingClient
     ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto", memo, due)
