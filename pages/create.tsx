@@ -33,7 +33,7 @@ const Create: NextPage = () => {
   const [loadedAt, setLoadedAt] = useState(new Date());
   const [loading, setLoading] = useState(false);
   const [creditorAddress, setCreditorAddress] = useState("");
-  const [edgeAmount, setEdgeAmount] = useState(Number);
+  const [edgeAmount, setEdgeAmount] = useState("");
   const [due, setDue] = useState();
   const [memo, setMemo] = useState("");
   const [denom,setDenom] = useState("");
@@ -91,7 +91,7 @@ const Create: NextPage = () => {
     setLoading(true);
 
     const amount = edgeAmount;
-    const baseFee = amount / 1000000 ;
+    const baseFee = convertMicroDenomToDenom(amount);
     const dues = baseFee;
       
     const due: Coin[] = [
@@ -119,7 +119,7 @@ const Create: NextPage = () => {
 
       setLoadedAt(new Date());
       setLoading(false);
-      setEdgeAmount(Number);
+      setEdgeAmount("");
       setMemo("");
       // setDue(due);
       setSuccess(message);
@@ -157,7 +157,8 @@ return (
             id="edge-amount"
             className="input input-bordered focus:input-primary input-lg w-full pr-24 rounded-full text-center font-mono text-lg"
             placeholder={"What you owe..."}
-            onChange={(event) => setEdgeAmount(event.target.valueAsNumber)}
+            step="0.1"
+            onChange={(event) => setEdgeAmount(event.target.value)}
             value={edgeAmount}
           />
            <span className="absolute top-0 right-0 bottom-0 px-4 py-5 rounded-r-full bg-secondary text-base-100 text-sm">
