@@ -115,7 +115,7 @@ const Create: NextPage = () => {
       console.log("resp", resp);
       console.log("txHash", resp.transactionHash)
 
-      const message = `Success! You recorded a obligation of  ${edgeAmount}  to ${creditorAddress} with the following transaction ${resp.transactionHash}.`;
+      const message = `Success! You recorded a obligation to pay ${creditorAddress} a total of ${edgeAmount} ${denom}. TransactionHash ${resp.transactionHash}.`;
 
       setLoadedAt(new Date());
       setLoading(false);
