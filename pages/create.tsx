@@ -15,10 +15,9 @@ import { networkInterfaces } from "os";
 
 
 import { CosmWasmClient, SigningCosmWasmClient, ExecuteResult } from "@cosmjs/cosmwasm-stargate";
-import { Batch, DenomResponse, Addr, Edge, ExecuteMsg, InstantiateMsg, Network, QueryMsg } from "util/ts/Obligatto2.types.js";
-import { Obligatto2Client } from "util/ts/Obligatto2.client";
-import { getDenomSelector } from "util/ts/Obligatto2.recoil";
-import { useObligatto2GetDenomQuery } from "util/ts/Obligatto2.react-query";
+// import { Batch, DenomResponse, Addr, Edge, ExecuteMsg, InstantiateMsg, Network, QueryMsg } from "util/ts/Obligatto2.types.js";
+// import { Obligatto2Client } from "util/ts/Obligatto2.client";
+
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
 const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg";
