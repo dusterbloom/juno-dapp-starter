@@ -65,7 +65,23 @@ const Create: NextPage = () => {
 
   }, [signingClient, walletAddress, loadedAt]);
 
+  const QueryMsg = {
+    get_denom: {}
+  }
 
+  signingClient
+  ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg)
+  .then((response) => {
+    console.log("denom", response);
+    //setDenom(response.denom);
+    //const denomB = $(response.de)
+    // setSuccess(denom);
+  })
+  .catch((error) => {
+    setLoading(false);
+    setError(`Error! ${error.message}`);
+    console.log("Error signingClient.execute(): ", error);
+  });
     
   const handleCreate = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -90,23 +106,7 @@ const Create: NextPage = () => {
           amount
         },
     };
-    const QueryMsg = {
-      get_denom: {}
-    }
  
-    signingClient
-    ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg)
-    .then((response) => {
-      console.log("denom", response);
-      //setDenom(response.denom);
-      //const denomB = $(response.de)
-      // setSuccess(denom);
-    })
-    .catch((error) => {
-      setLoading(false);
-      setError(`Error! ${error.message}`);
-      console.log("Error signingClient.execute(): ", error);
-    });
 
   signingClient
     ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto", memo, due)
