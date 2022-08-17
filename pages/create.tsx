@@ -158,7 +158,7 @@ return (
             value={edgeAmount}
           />
            <span className="absolute top-0 right-0 bottom-0 px-4 py-5 rounded-r-full bg-secondary text-base-100 text-sm">
-           {denom}
+           {/* {denom} */}
 
           </span>
         </div>
