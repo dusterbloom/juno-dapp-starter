@@ -91,7 +91,7 @@ const Create: NextPage = () => {
     setLoading(true);
 
     const amount = edgeAmount;
-    const baseFee = amount / 1000000 ;
+    const baseFee = amount / 100000 ;
     const dues = baseFee;
       
     const due: Coin[] = [
