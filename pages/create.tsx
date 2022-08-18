@@ -41,7 +41,8 @@ const Create: NextPage = () => {
 
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-
+  
+  // Loads the wallet and converts the balance
   useEffect(() => {
     if (!signingClient || walletAddress.length === 0) {
       return;
@@ -115,7 +116,7 @@ const Create: NextPage = () => {
       console.log("resp", resp);
       console.log("txHash", resp.transactionHash)
 
-      const message = `Success! You recorded a obligation to pay ${edgeAmount} ${denom} to ${creditorAddress} with the following transaction ${resp.transactionHash}.`;
+      const message = `Success! You recorded an obligation to pay ${edgeAmount} ${denom} to ${creditorAddress} with the following transaction ${resp.transactionHash}.`;
 
       setLoadedAt(new Date());
       setLoading(false);
