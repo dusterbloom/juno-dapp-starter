@@ -24,7 +24,7 @@ import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event"
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
 const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg";
 const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM 
-const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm1aee5vz8pat4az3j32tsh004jneehewuq0n5u3j9nh36a0azu4z9smrsdgf";
+const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm125h6mgvdwqqecje2srhuzhq90vfzs44garve3r7zycvp3rs97gkqw7ny5e";
 
 
 const Create: NextPage = () => {
