@@ -22,15 +22,15 @@ const Home: NextPage = () => {
       </div>
     
     <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 max-w-full sm:w-full">
-    <Link href="/create" passHref>
+    <Link href="/clear" passHref>
       <a className="p-6 mt-6 text-left border border-secondary hover:border-primary w-96 rounded-xl hover:text-primary focus:text-primary-focus">
-        <h3 className="text-2xl font-bold">Record an obligation &rarr;</h3>
+        <h3 className="text-2xl font-bold">View all obligations &rarr;</h3>
         <p className="mt-4 text-xl">
-          Record a debt you owe to another wallet.
+          View all obligations recorded in the contract.
         </p>
       </a>
     </Link>
-    <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 max-w-full sm:w-full">
+    {/* <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 max-w-full sm:w-full">
         <Link href="/send" passHref>
           <a className="p-6 mt-6 text-left border border-secondary hover:border-primary w-96 rounded-xl hover:text-primary focus:text-primary-focus">
             <h3 className="text-2xl font-bold">Transfer to wallet &rarr;</h3>
@@ -39,7 +39,7 @@ const Home: NextPage = () => {
             </p>
           </a>
         </Link>
-      </div>
+      </div> */}
   </div>
   </WalletLoader>
   );
