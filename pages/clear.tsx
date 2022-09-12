@@ -87,7 +87,6 @@ const Clear: NextPage = () => {
       //  setEdges(
       //   [`${(edge_id)} ${(debtor)} ${(creditor)} ${(amount)} ${(graph_id)}`]
       // );
-      setSuccess("");
       setLoading(false);
       // setSuccess(denom);
     })
@@ -145,52 +144,51 @@ const Clear: NextPage = () => {
 
 
     
-//   const handleCreate = (event: MouseEvent<HTMLElement>) => {
-//     event.preventDefault();
-//     setError("");
-//     setSuccess("");
-//     setLoading(true);
+  const handleClear = (event: MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    setError("");
+    setSuccess("");
+    setLoading(true);
 
-//     const amount = edgeAmount;
-//     const baseFee = amount / 100000 ;
-//     const dues = baseFee;
+    // const amount = edgeAmount;
+    // const baseFee = amount / 100000 ;
+    // const dues = baseFee;
       
-//     const due: Coin[] = [
-//       {
-//         amount: convertDenomToMicroDenom(dues),
-//         denom: PUBLIC_STAKING_DENOM,
-//       },
-//     ];
+    // const due: Coin[] = [
+    //   {
+    //     amount: convertDenomToMicroDenom(dues),
+    //     denom: PUBLIC_STAKING_DENOM,
+    //   },
+    // ];
 
-//     const txMessage = {
-//         create_edge: {
-//           creditor: creditorAddress,
-//           amount
-//         },
-//     };
+    const txMessage = {
+      find_savings: {
+         
+        },
+    };
  
 
-//   signingClient
-//     ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto", memo, due)
-//     .then((resp) => {
-//       console.log("resp", resp);
-//       console.log("txHash", resp.transactionHash)
+  signingClient
+    ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto")
+    .then((resp) => {
+      console.log("resp", resp);
+      console.log("txHash", resp.transactionHash)
 
-//       const message = `Success! You recorded an obligation to pay ${edgeAmount} ${denom} to ${creditorAddress} with the following transaction ${resp.transactionHash}.`;
+      const message = `Success! The obligations were cleared with the following transaction ${resp.transactionHash}.`;
 
-//       setLoadedAt(new Date());
-//       setLoading(false);
-//       setEdgeAmount(Number);
-//       setMemo("");
-//       // setDue(due);
-//       setSuccess(message);
-//     })
-//     .catch((error) => {
-//       setLoading(false);
-//       setError(`Error! ${error.message}`);
-//       console.log("Error signingClient.execute(): ", error);
-//     });
-// };
+      setLoadedAt(new Date());
+      setLoading(false);
+      setEdgeAmount(Number);
+      setMemo("");
+      // setDue(due);
+      setSuccess(message);
+    })
+    .catch((error) => {
+      setLoading(false);
+      setError(`Error! ${error.message}`);
+      console.log("Error signingClient.execute(): ", error);
+    });
+};
 
 return (
     <WalletLoader loading={loading}>
@@ -237,9 +235,7 @@ return (
 
                   {edges.map(e => 
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        {/* <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Apple MacBook Pro 17"
-                        </th> */}
+                   
                         <th scope="row" className="py-4 px-6">
                         <td className="py-4 px-6">
                         {e.edge_id}
@@ -265,7 +261,7 @@ return (
 
 
 
-      <div className="flex w-full max-w-xl">
+      {/* <div className="flex w-full max-w-xl"> */}
         {/* <input
           type="text"
           id="creditor-address"
@@ -278,9 +274,9 @@ return (
         /> */}
 
 
-      </div>
+      {/* </div> */}
 
-      <div className="flex w-full max-w-xl md:flex-row mt-4">
+      {/* <div className="flex w-full max-w-xl md:flex-row mt-4">
           <input
             type="text"
             id="memo"
@@ -289,7 +285,7 @@ return (
             onChange={(event) => setMemo(event.target.value)}
             value={memo}
           />
-        </div>
+        </div> */}
 
       <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
 
@@ -310,12 +306,12 @@ return (
 
          
         
-        {/* <button
+        <button
           className="mt-4 md:mt-0 btn btn-primary btn-lg font-semibold hover:text-base-100 text-2xl rounded-full flex-grow"
           onClick={handleClear}
         >
-          GO
-        </button> */}
+          CLEAR
+        </button>
       
       </div>
       
