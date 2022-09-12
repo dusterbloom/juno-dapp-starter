@@ -209,7 +209,7 @@ const Clear: NextPage = () => {
       console.log("resp", resp);
       console.log("txHash", resp.transactionHash)
 
-      const message = `Success! The obligations were cleared with the following transaction ${resp.transactionHash}.`;
+      const message = `Success! All obligations were deleted with the following transaction ${resp.transactionHash}.`;
 
       setLoadedAt(new Date());
       setLoading(false);
@@ -261,13 +261,13 @@ return (
                                 <a href="#"><svg xmlns="http://www.w3.org/2000/svg" className="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"></path></svg></a>
                             </div>
                         </th>
-                        <th scope="col" className="py-3 px-6">
+                        {/* <th scope="col" className="py-3 px-6">
                             <span className="sr-only">Edit</span>
-                        </th>
+                        </th> */}
                     </tr>
                 </thead>
                 <tbody>
-
+                {/* //map each array element to the right table cell */}
                   {edges.map(e => 
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                    
@@ -285,9 +285,9 @@ return (
                         <td className="py-4 px-6">
                           {e.amount}
                         </td>
-                        <td className="py-4 px-6 text-right">
+                        {/* <td className="py-4 px-6 text-right">
                             <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
+                        </td> */}
                     </tr>
                   )}
                 </tbody>
@@ -331,16 +331,16 @@ return (
           className="mt-4 md:mt-0 btn btn-primary btn-lg font-semibold hover:text-base-100 text-2xl rounded-full flex-grow"
           onClick={handleClear}
         >
-          CLEAR
+          Find liquidity savings
         </button>
         </div>
 
-        <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">>
+        <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
         <button
           className="mt-4 md:mt-0 btn btn-primary btn-lg font-semibold hover:text-base-100 text-2xl rounded-full flex-grow"
           onClick={handleReset}
         >
-          RESET
+          Delete all edges
         </button>
       
       </div>
