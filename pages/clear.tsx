@@ -171,9 +171,15 @@ const Clear: NextPage = () => {
     ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto")
     .then((resp) => {
       console.log("resp", resp);
-      console.log("txHash", resp.transactionHash)
-
-      const message = `Success! The obligations were cleared with the following transaction ${resp.transactionHash}.`;
+      console.log("txHash", resp.transactionHash);
+      console.log("Total Debt", resp.logs[0].events[2].attributes[4]);
+      console.log("Total Debt cleared", resp.logs[0].events[2].attributes[5]);
+      const totalDebt = resp.logs[0].events[2].attributes[3].value ;
+      const totalDebtCleared = resp.logs[0].events[2].attributes[5].value;
+     
+      const message = `Success! The obligations were cleared with the following transaction ${resp.transactionHash}.
+      Total debt was ${totalDebt}. Total debt cleared is ${totalDebtCleared}.`
+    
 
       setLoadedAt(new Date());
       setLoading(false);
@@ -323,10 +329,7 @@ return (
         </div> */}
 
       <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
-
-
          
-        
         <button
           className="mt-4 md:mt-0 btn btn-primary btn-lg font-semibold hover:text-base-100 text-2xl rounded-full flex-grow"
           onClick={handleClear}
