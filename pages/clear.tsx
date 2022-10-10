@@ -278,8 +278,8 @@ return (
                   {edges.map((e, index) => 
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                    
-                        <th scope="row" className="py-4 px-6">
-                        <td  className="py-4 px-6" key={index}>
+                        <th key={index} scope="row" className="py-4 px-6">
+                        <td  className="py-4 px-6" >
                         {e.edge_id}
                         </td>
                         </th>
