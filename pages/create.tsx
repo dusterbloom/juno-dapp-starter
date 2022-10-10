@@ -21,7 +21,9 @@ import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event"
 // import { Obligatto2Client } from "util/ts/Obligatto2.client";
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
-const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM || "beat" ;
+const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM || "ubeat" ;
+const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umix" ;
+
 const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm1ufs3tlq4umljk0qfe8k5ya0x6hpavn897u2cnf9k0en9jr7qarqq3zkt9t";
 
 const Create: NextPage = () => {
