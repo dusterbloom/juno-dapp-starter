@@ -35,8 +35,8 @@ import { resourceLimits } from 'worker_threads';
 
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
-const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "ucosm";
-const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM 
+const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umix";
+const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM || "ubeat";
 const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm1pvrwmjuusn9wh34j7y520g8gumuy9xtl3gvprlljfdpwju3x7ucsfg5rpz";
 
 const Upload: NextPage = () => {
@@ -103,7 +103,7 @@ const Upload: NextPage = () => {
     setSuccess("");
 
     signingClient
-      .getBalance(walletAddress, PUBLIC_STAKING_DENOM)
+      .getBalance(walletAddress, PUBLIC_FEE_DENOM)
       .then((response: any) => {
         const { amount, denom }: { amount: number; denom: string } = response;
         setBalance(
