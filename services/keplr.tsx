@@ -18,7 +18,7 @@ export const connectKeplr = async () => {
   } else {
     if (window.keplr.experimentalSuggestChain) {
       const stakingDenom = convertFromMicroDenom(
-        process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg"
+        process.env.NEXT_PUBLIC_FEE_DENOM || "ubeat"
       );
 
       try {
@@ -42,7 +42,7 @@ export const connectKeplr = async () => {
             // Coin denomination to be displayed to the user.
             coinDenom: stakingDenom,
             // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-            coinMinimalDenom: process.env.NEXT_PUBLIC_STAKING_DENOM,
+            coinMinimalDenom: process.env.NEXT_PUBLIC_FEE_DENOM,
             // # of decimal points to convert minimal denomination to user-facing denomination.
             coinDecimals: 6,
             // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
