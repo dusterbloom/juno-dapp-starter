@@ -25,7 +25,7 @@ import { stringify } from "querystring";
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
 const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umix";
-const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM  || "ubeat"
+const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM  || "ubeat";
 const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm1ufs3tlq4umljk0qfe8k5ya0x6hpavn897u2cnf9k0en9jr7qarqq3zkt9t";
 
 
@@ -279,7 +279,7 @@ return (
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                    
                         <th scope="row" className="py-4 px-6">
-                        <td className="py-4 px-6">
+                        <td key={e.edge_id} className="py-4 px-6">
                         {e.edge_id}
                         </td>
                         </th>

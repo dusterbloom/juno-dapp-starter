@@ -220,13 +220,15 @@ const Upload: NextPage = () => {
                     </tr>
                 </thead>      
                 <tbody>
-           
-                 { parsedCsvData.map((e)  => (
 
+                  
+           
+                 {/* { parsedCsvData.map((e)  => ( */}
+                    { parsedCsvData.map(e => (
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" >
-                   
+
                         <th scope="row" className="py-4 px-6">
-                        <td className="py-4 px-6">
+                        <td key={e.edge_id} className="py-4 px-6">
                         {e.edge_id}
                         </td>
                         </th>
