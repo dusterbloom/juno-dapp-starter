@@ -11,7 +11,7 @@ import {
 } from "util/conversion";
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
-const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg";
+const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "beat";
 
 const Send: NextPage = () => {
   const { walletAddress, signingClient } = useSigningClient();
@@ -22,6 +22,8 @@ const Send: NextPage = () => {
   const [sendAmount, setSendAmount] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+
+
 
   useEffect(() => {
     if (!signingClient || walletAddress.length === 0) {

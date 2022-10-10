@@ -1,0 +1,4 @@
+"debtor","creditor","amount","edge_id","graph_id"
+"wasm1dntul0ku50r4tps8a4zqhcu208j32kxrca402x","wasm14qa3959f2ys8ep6k22jp0pfa2s44s8qcuvdevq",60000,1,2
+"wasm14qa3959f2ys8ep6k22jp0pfa2s44s8qcuvdevq","wasm16u7gjk2y7y2dauy59mve7uyrkukhy56h8f6d79",40000,2,2
+"wasm16u7gjk2y7y2dauy59mve7uyrkukhy56h8f6d79","wasm1dntul0ku50r4tps8a4zqhcu208j32kxrca402x",10000,3,2

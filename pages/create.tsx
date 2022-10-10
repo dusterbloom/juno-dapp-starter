@@ -1,5 +1,5 @@
 import { useState, useEffect, MouseEvent, useDebugValue } from "react";
-import type { NextPage } from "next";
+import type { NextApiRequest, NextApiResponse, NextPage } from "next";
 import { StdFee, Coin } from "@cosmjs/amino";
 
 import WalletLoader from "components/WalletLoader";
@@ -20,12 +20,9 @@ import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event"
 // import { Batch, DenomResponse, Addr, Edge, ExecuteMsg, InstantiateMsg, Network, QueryMsg } from "util/ts/Obligatto2.types.js";
 // import { Obligatto2Client } from "util/ts/Obligatto2.client";
 
-
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
-const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg";
-const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM 
-const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm125h6mgvdwqqecje2srhuzhq90vfzs44garve3r7zycvp3rs97gkqw7ny5e";
-
+const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM || "beat" ;
+const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm1ufs3tlq4umljk0qfe8k5ya0x6hpavn897u2cnf9k0en9jr7qarqq3zkt9t";
 
 const Create: NextPage = () => {
   const { walletAddress, signingClient } = useSigningClient();
@@ -41,8 +38,7 @@ const Create: NextPage = () => {
 
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-  
-  // Loads the wallet and converts the balance
+
   useEffect(() => {
     if (!signingClient || walletAddress.length === 0) {
       return;
@@ -92,7 +88,7 @@ const Create: NextPage = () => {
     setLoading(true);
 
     const amount = edgeAmount;
-    const baseFee = amount / 100000 ;
+    const baseFee = amount / 1000000 ;
     const dues = baseFee;
       
     const due: Coin[] = [
@@ -116,7 +112,7 @@ const Create: NextPage = () => {
       console.log("resp", resp);
       console.log("txHash", resp.transactionHash)
 
-      const message = `Success! You recorded an obligation to pay ${edgeAmount} ${denom} to ${creditorAddress} with the following transaction ${resp.transactionHash}.`;
+      const message = `Success! You recorded a obligation to pay ${edgeAmount} ${denom} to ${creditorAddress} with the following transaction ${resp.transactionHash}.`;
 
       setLoadedAt(new Date());
       setLoading(false);
