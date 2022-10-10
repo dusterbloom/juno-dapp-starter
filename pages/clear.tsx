@@ -57,7 +57,7 @@ const Clear: NextPage = () => {
     setSuccess("");
 
     signingClient
-      .getBalance(walletAddress, PUBLIC_STAKING_DENOM)
+      .getBalance(walletAddress, PUBLIC_FEE_DENOM)
       .then((response: any) => {
         const { amount, denom }: { amount: number; denom: string } = response;
         setBalance(

@@ -12,6 +12,8 @@ import {
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
 const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "umix";
+const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM || "ubeat" ;
+
 
 const Send: NextPage = () => {
   const { walletAddress, signingClient } = useSigningClient();
@@ -33,7 +35,7 @@ const Send: NextPage = () => {
     setSuccess("");
 
     signingClient
-      .getBalance(walletAddress, PUBLIC_STAKING_DENOM)
+      .getBalance(walletAddress, PUBLIC_FEE_DENOM)
       .then((response: any) => {
         const { amount, denom }: { amount: number; denom: string } = response;
         setBalance(
