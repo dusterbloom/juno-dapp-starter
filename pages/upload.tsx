@@ -67,7 +67,7 @@ const Upload: NextPage = () => {
     Papa.parse(file, {
       header: true,
       dynamicTyping: true,
-      complete: results => {
+      complete: (results: any) => {
         setParsedCsvData(results.data);
         
       },
