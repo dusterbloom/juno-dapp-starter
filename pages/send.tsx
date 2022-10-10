@@ -56,7 +56,7 @@ const Send: NextPage = () => {
     const amount: Coin[] = [
       {
         amount: convertDenomToMicroDenom(sendAmount),
-        denom: PUBLIC_STAKING_DENOM,
+        denom: PUBLIC_FEE_DENOM,
       },
     ];
 

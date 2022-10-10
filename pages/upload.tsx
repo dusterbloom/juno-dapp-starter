@@ -74,7 +74,7 @@ const Upload: NextPage = () => {
     });
   };
 
-   console.log(parsedCsvData);
+  //  console.log(parsedCsvData);
 
   const onDrop = useCallback(acceptedFiles => {
     if (acceptedFiles.length) {

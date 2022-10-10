@@ -49,7 +49,7 @@ const Create: NextPage = () => {
     setSuccess("");
 
     signingClient
-      .getBalance(walletAddress, PUBLIC_STAKING_DENOM)
+      .getBalance(walletAddress, PUBLIC_FEE_DENOM)
       .then((response: any) => {
         const { amount, denom }: { amount: number; denom: string } = response;
         setBalance(
@@ -96,7 +96,7 @@ const Create: NextPage = () => {
     const due: Coin[] = [
       {
         amount: convertDenomToMicroDenom(dues),
-        denom: PUBLIC_STAKING_DENOM,
+        denom: PUBLIC_FEE_DENOM,
       },
     ];
 
