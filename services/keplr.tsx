@@ -38,7 +38,7 @@ export const connectKeplr = async () => {
           // REST endpoint of the chain.
           rest: process.env.NEXT_PUBLIC_CHAIN_REST_ENDPOINT,
           // Staking coin information
-          stakeCurrency: {
+          feeCurrency: {
             // Coin denomination to be displayed to the user.
             coinDenom: feeDenom,
             // Actual denom (i.e. uatom, uscrt) used by the blockchain.
@@ -84,6 +84,11 @@ export const connectKeplr = async () => {
           // List of coin/tokens used as a fee token in this chain.
           feeCurrencies: [
             {
+              gasPriceStep: {
+                low: 0.1,
+                average: 0.25,
+                high: 0.4,
+              },
               // Coin denomination to be displayed to the user.
               coinDenom: feeDenom,
               // Actual denom (i.e. uatom, uscrt) used by the blockchain.
@@ -106,11 +111,7 @@ export const connectKeplr = async () => {
           // Currently, Keplr doesn't support dynamic calculation of the gas prices based on on-chain data.
           // Make sure that the gas prices are higher than the minimum gas prices accepted by chain validators and RPC/REST endpoint.
          features: ['cosmwasm'],
-          gasPriceStep: {
-            low: 0.1,
-            average: 0.25,
-            high: 0.4,
-          },
+         
         });
       } catch {
         alert("Failed to suggest the chain");
