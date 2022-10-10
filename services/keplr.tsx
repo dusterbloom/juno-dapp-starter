@@ -82,7 +82,11 @@ export const connectKeplr = async () => {
             },
           ],
           // List of coin/tokens used as a fee token in this chain.
-          feeCurrencies: [ { coinDenom: feeDenom , coinMinimalDenom: "ubeat", coinDecimals: 6, coinGeckoId: "cosmos", gasPriceStep: { low: 0.01, avergage: 0.025, high: 0.04 } }, ]
+          feeCurrencies: [ { 
+            coinDenom: feeDenom , 
+            coinMinimalDenom: "ubeat",
+             coinDecimals: 6, coinGeckoId: "cosmos", 
+             gasPriceStep: { low: 0.01, avergage: 0.025, high: 0.04 } }],
           
           
           // // [
