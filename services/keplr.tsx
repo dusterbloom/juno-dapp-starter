@@ -17,8 +17,8 @@ export const connectKeplr = async () => {
     alert("Please install keplr extension");
   } else {
     if (window.keplr.experimentalSuggestChain) {
-      const stakingDenom = convertFromMicroDenom(
-        process.env.NEXT_PUBLIC_STAKING_DENOM || "umlg"
+      const feeDenom = convertFromMicroDenom(
+        process.env.NEXT_PUBLIC_FEE_DENOM || "ubeat"
       );
 
       try {
@@ -38,11 +38,11 @@ export const connectKeplr = async () => {
           // REST endpoint of the chain.
           rest: process.env.NEXT_PUBLIC_CHAIN_REST_ENDPOINT,
           // Staking coin information
-          stakeCurrency: {
+          feeCurrency: {
             // Coin denomination to be displayed to the user.
-            coinDenom: stakingDenom,
+            coinDenom: feeDenom,
             // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-            coinMinimalDenom: process.env.NEXT_PUBLIC_STAKING_DENOM,
+            coinMinimalDenom: process.env.NEXT_PUBLIC_FEE_DENOM,
             // # of decimal points to convert minimal denomination to user-facing denomination.
             coinDecimals: 6,
             // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
@@ -71,9 +71,9 @@ export const connectKeplr = async () => {
           currencies: [
             {
               // Coin denomination to be displayed to the user.
-              coinDenom: stakingDenom,
+              coinDenom: feeDenom,
               // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-              coinMinimalDenom: process.env.NEXT_PUBLIC_STAKING_DENOM,
+              coinMinimalDenom: process.env.NEXT_PUBLIC_FEE_DENOM,
               // # of decimal points to convert minimal denomination to user-facing denomination.
               coinDecimals: 6,
               // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
@@ -82,19 +82,31 @@ export const connectKeplr = async () => {
             },
           ],
           // List of coin/tokens used as a fee token in this chain.
-          feeCurrencies: [
-            {
-              // Coin denomination to be displayed to the user.
-              coinDenom: stakingDenom,
-              // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-              coinMinimalDenom: process.env.NEXT_PUBLIC_STAKING_DENOM,
-              // # of decimal points to convert minimal denomination to user-facing denomination.
-              coinDecimals: 6,
-              // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
-              // You can get id from https://api.coingecko.com/api/v3/coins/list if it is listed.
-              // coinGeckoId: ""
-            },
-          ],
+          feeCurrencies: [ { 
+            coinDenom: feeDenom , 
+            coinMinimalDenom: "ubeat",
+             coinDecimals: 6, coinGeckoId: "cosmos", 
+             gasPriceStep: { low: 0.01, avergage: 0.025, high: 0.04 } }],
+          
+          
+          // // [
+          // //   {
+          // //     gasPriceStep: {
+          // //       low: 0.1,
+          // //       average: 0.25,
+          // //       high: 0.4,
+          // //     },
+          // //     // Coin denomination to be displayed to the user.
+          // //     coinDenom: feeDenom,
+          // //     // Actual denom (i.e. uatom, uscrt) used by the blockchain.
+          // //     coinMinimalDenom: process.env.NEXT_PUBLIC_FEE_DENOM,
+          // //     // # of decimal points to convert minimal denomination to user-facing denomination.
+          // //     coinDecimals: 6,
+          // //     // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
+          // //     // You can get id from https://api.coingecko.com/api/v3/coins/list if it is listed.
+          // //     // coinGeckoId: ""
+          // //   },
+          // ],
           // (Optional) The number of the coin type.
           // This field is only used to fetch the address from ENS.
           // Ideally, it is recommended to be the same with BIP44 path's coin type.
@@ -106,11 +118,7 @@ export const connectKeplr = async () => {
           // Currently, Keplr doesn't support dynamic calculation of the gas prices based on on-chain data.
           // Make sure that the gas prices are higher than the minimum gas prices accepted by chain validators and RPC/REST endpoint.
          features: ['cosmwasm'],
-          gasPriceStep: {
-            low: 0.1,
-            average: 0.25,
-            high: 0.4,
-          },
+         
         });
       } catch {
         alert("Failed to suggest the chain");
