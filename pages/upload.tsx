@@ -63,7 +63,7 @@ const Upload: NextPage = () => {
 
   // Adding dropzone
 
-  const parseFile = file => {
+  const parseFile = (file: any) => {
     Papa.parse(file, {
       header: true,
       dynamicTyping: true,
