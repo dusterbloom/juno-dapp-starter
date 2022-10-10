@@ -90,15 +90,15 @@ const Create: NextPage = () => {
     setLoading(true);
 
     const amount = edgeAmount;
-    const baseFee = amount / 1000000 ;
-    const dues = baseFee;
+    // const baseFee = amount / 1000000 ;
+    // const dues = baseFee;
       
-    const due: Coin[] = [
-      {
-        amount: convertDenomToMicroDenom(dues),
-        denom: PUBLIC_FEE_DENOM,
-      },
-    ];
+    // const due: Coin[] = [
+    //   {
+    //     amount: convertDenomToMicroDenom(dues),
+    //     denom: PUBLIC_FEE_DENOM,
+    //   },
+    // ];
 
     const txMessage = {
         create_edge: {
@@ -109,7 +109,7 @@ const Create: NextPage = () => {
  
 
   signingClient
-    ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto", memo, due)
+    ?.execute(walletAddress, PUBLIC_CONTRACT_ADDRESS, txMessage, "auto", memo)
     .then((resp) => {
       console.log("resp", resp);
       console.log("txHash", resp.transactionHash)

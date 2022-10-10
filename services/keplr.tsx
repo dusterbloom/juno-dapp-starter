@@ -17,7 +17,7 @@ export const connectKeplr = async () => {
     alert("Please install keplr extension");
   } else {
     if (window.keplr.experimentalSuggestChain) {
-      const stakingDenom = convertFromMicroDenom(
+      const feeDenom = convertFromMicroDenom(
         process.env.NEXT_PUBLIC_FEE_DENOM || "ubeat"
       );
 
@@ -40,7 +40,7 @@ export const connectKeplr = async () => {
           // Staking coin information
           stakeCurrency: {
             // Coin denomination to be displayed to the user.
-            coinDenom: stakingDenom,
+            coinDenom: feeDenom,
             // Actual denom (i.e. uatom, uscrt) used by the blockchain.
             coinMinimalDenom: process.env.NEXT_PUBLIC_FEE_DENOM,
             // # of decimal points to convert minimal denomination to user-facing denomination.
@@ -71,7 +71,7 @@ export const connectKeplr = async () => {
           currencies: [
             {
               // Coin denomination to be displayed to the user.
-              coinDenom: stakingDenom,
+              coinDenom: feeDenom,
               // Actual denom (i.e. uatom, uscrt) used by the blockchain.
               coinMinimalDenom: process.env.NEXT_PUBLIC_FEE_DENOM,
               // # of decimal points to convert minimal denomination to user-facing denomination.
@@ -85,7 +85,7 @@ export const connectKeplr = async () => {
           feeCurrencies: [
             {
               // Coin denomination to be displayed to the user.
-              coinDenom: stakingDenom,
+              coinDenom: feeDenom,
               // Actual denom (i.e. uatom, uscrt) used by the blockchain.
               coinMinimalDenom: process.env.NEXT_PUBLIC_FEE_DENOM,
               // # of decimal points to convert minimal denomination to user-facing denomination.
