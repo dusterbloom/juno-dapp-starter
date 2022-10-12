@@ -30,57 +30,16 @@ const View: NextPage = () => {
 
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-  const [parsedCsvData, setParsedCsvData] = useState<Graph[]>([]);
+  const [edges, setEdges] = useState<Link[]>([]);
+  const [edges2, setEdges2] = useState<Node[]>([]);
+  // const [edges, setEdges] = useState([]);
+  // const [edges2, setEdges2] = useState([]);
+
+  // const [edges,setEdges] = useState([{ debtor: '', creditor: '' , amount: 0, edge_id: 0, graph_id: 0}]);
 
 
-  type Graph = {
-    debtor: string;
-    creditor: string;
-    amount: number;
-    edge_id?: number;
-    graph_id?: number;
-  };
 
-  type Node = {
-      id: string;
-      name: string;
-      link: string;
-  };
-      
-  type Link = {
-      source: string;
-      target: string;
-  };
-      
 
-const links: Link[] = [];
-const nodes: Node[] = [];
-
-const canvas = document.querySelector("canvas") as HTMLCanvasElement;
-const config: GraphConfigInterface<Node, Link> = {
-  backgroundColor: "#151515",
-  nodeSize: 10,
-  nodeColor: "#404040",
-  linkWidth: 2,
-  linkColor: "#8C8C8C",
-  linkArrows: true,
-  simulation: {
-    linkDistance: 10,
-    linkSpring: 2,
-    repulsion: 1,
-    gravity: 0.25,
-    decay: 100000
-  },
-  events: {
-    onClick: (node: any) => {
-      console.log("Clicked node: ", node);
-    }
-  }
-};
-
-const graph = new Graph(canvas, config);
-
-graph.setData(nodes, links)
 
   // Loads the wallet and converts the balance
   useEffect(() => {
@@ -104,10 +63,70 @@ graph.setData(nodes, links)
         console.log("Error signingClient.getBalance(): ", error);
       });
 
+    
+    // Get all edges 
+  const QueryMsg3 = {
+    all_edges: {}
+  }
+
+
+// Get all edges
+    signingClient
+    ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg3)
+    .then((response: any) => {
+      console.log("edges", response.edges);
+      setEdges(response.edges)
+      // console.log("edges", response);
+      // const data = response;
+    //  setEdges(`${response}`);
+      //  setEdges(
+      //   [`${(edge_id)} ${(debtor)} ${(creditor)} ${(amount)} ${(graph_id)}`]
+      // );
+      // setLoading(false);
+      // setSuccess(denom);
+    })
+    .catch((error) => {
+      // setLoading(false);
+      setError(`Error! ${error.message}`);
+      console.log("Error signingClient.execute(): ", error);
+    });
+
+    
+
 }, [signingClient, walletAddress, loadedAt]);
 
 
-  
+// setResults(fuse.search(value))
+          
+type Graph = {
+  debtor: string;
+  creditor: string;
+  amount: number;
+  edge_id?: number;
+  graph_id?: number;
+};
+
+type Node = {
+    id: 'Graph["edge_id"]';
+    name: 'Graph["debtor"]';
+    link: 'Graph["amount"]';
+};
+    
+type Link = {
+    source: 'Graph["debtor"]';
+    target: 'Graph["creditor"]';
+    value: 'Graph["amount"]';
+};
+    
+
+const links: Link[] = edges
+const nodes: Node[] = edges2;
+// const [results, setResults] = useState();
+
+
+
+  // const el = document.getElementById('canvas');
+  // console.log(el);
 
   return (
     <WalletLoader loading={loading}>
@@ -160,11 +179,89 @@ graph.setData(nodes, links)
             </table>
         </div>
 
+      
+      
+        <div
+              {...async () => {
 
-      <div id="canvas">
-        <canvas />
-      </div>
+                const cosmograph = await import('@cosmograph/cosmos');
+              
+                 const canvas = document.querySelector('canvas') as HTMLCanvasElement;
+              
+                // setCanvas(canvas);
+                const config: GraphConfigInterface<Node, Link> = {
+                  backgroundColor: "#151515",
+                  nodeSize: 10,
+                  nodeColor: "#404040",
+                  linkWidth: 2,
+                  linkColor: "#8C8C8C",
+                  linkArrows: true,
+                  simulation: {
+                    linkDistance: 10,
+                    linkSpring: 2,
+                    repulsion: 1,
+                    gravity: 0.25,
+                    decay: 100000
+                  },
+                }
+                // const graph = new cosmograph.Graph(canvas,config);
+
+                const graph = new Graph(canvas, config)
+                
+                graph.setData(nodes, links,true) 
+              
+              }}
+              
+
+
+              // {...async (e: { currentTarget: { value: any; }; }) => {
+              //   const { value } = e.currentTarget
+              //   // Dynamically load fuse.js
+              //   const cosmograph = (await import('@cosmograph/cosmos'))
+              //   // const fuse = new Fuse(names)
+
+                
+              //   // browser code
+              //   const canvas = document.querySelector('canvas') as HTMLCanvasElement;
+              
+              //   // setCanvas(canvas);
+              //   const config: GraphConfigInterface<Node, Link> = {
+              //     backgroundColor: "#151515",
+              //     nodeSize: 10,
+              //     nodeColor: "#404040",
+              //     linkWidth: 2,
+              //     linkColor: "#8C8C8C",
+              //     linkArrows: true,
+              //     simulation: {
+              //       linkDistance: 10,
+              //       linkSpring: 2,
+              //       repulsion: 1,
+              //       gravity: 0.25,
+              //       decay: 100000
+              //     },
+              //   }
+              //   // const graph = new cosmograph.Graph(canvas,config);
+
+              //   const graph = new Graph(canvas, config)
+                
+              //   graph.setData(nodes, links,true) 
+            
+
+                
+              // }}
+            />
+
+            {/* <pre>Results: {JSON.stringify(edges, null, 2)}</pre> */}
+            
+            <canvas />
+
     
+    
+
+  
+      
+
+
       <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
          
         <button
