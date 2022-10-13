@@ -14,7 +14,6 @@
     "@cosmjs/cosmwasm-stargate": "^0.27.0",
     "@cosmjs/proto-signing": "^0.27.0",
     "@cosmjs/stargate": "^0.27.0",
-    "@cosmograph/cosmos": "1.1.2-beta.0",
     "cors": "^2.8.5",
     "d3-selection": "^3.0.0",
     "d3-transition": "^3.0.1",
