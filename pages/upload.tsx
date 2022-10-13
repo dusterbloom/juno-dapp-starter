@@ -1,41 +1,17 @@
-import Link from 'next/link'
 import { useState, useEffect, MouseEvent, useDebugValue, useCallback, CSSProperties } from "react";
 import type { NextPage } from "next";
 import { StdFee, Coin } from "@cosmjs/amino";
-import Dropzone, { useDropzone } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import WalletLoader from "components/WalletLoader";
 import { useSigningClient } from "contexts/cosmwasm";
 import {
   convertMicroDenomToDenom,
   convertFromMicroDenom,
-  convertDenomToMicroDenom,
-  convertToFixedDecimals,
-  convertFromDenom,
+
 } from "util/conversion";
 import Papa from 'papaparse';
 
-import {
-  useCSVReader,
-  lightenDarkenColor,
-  formatFileSize,
-} from 'react-papaparse';
 
-
-import { text } from "stream/consumers";
-import { networkInterfaces, type } from "os";
-
-
-import { CosmWasmClient, SigningCosmWasmClient, ExecuteResult } from "@cosmjs/cosmwasm-stargate";
-import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event";
-import { stringify } from "querystring";
-import { resourceLimits } from 'worker_threads';
-// import { Batch, DenomResponse, Addr, Edge, ExecuteMsg, InstantiateMsg, Network, QueryMsg } from "util/ts/Obligatto2.types.js";
-// import { Obligatto2Client } from "util/ts/Obligatto2.client";
-
-
-
-const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
-const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "ubeat";
 const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM || "ubeat";
 const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm1pvrwmjuusn9wh34j7y520g8gumuy9xtl3gvprlljfdpwju3x7ucsfg5rpz";
 
@@ -87,15 +63,18 @@ const Upload: NextPage = () => {
     acceptedFiles
   } = useDropzone({
     onDrop,
-    // Accept?: 'text/csv',
+    // accept: 'text/csv'
+    
+    
+  
   });
 
 
-  const files = acceptedFiles.map(file => (
-    <li key={file.name}>
-      {file.name} - {file.size} bytes
-    </li>
-  ));
+  // const files = acceptedFiles.map(file => (
+  //   <li key={file.name}>
+  //     {file.name} - {file.size} bytes
+  //   </li>
+  // ));
 
   // Loads the wallet and converts the balance
   useEffect(() => {
@@ -122,7 +101,6 @@ const Upload: NextPage = () => {
 }, [signingClient, walletAddress, loadedAt]);
 
   // UPLOAD Message
-  
   
   const handleUpload = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -165,12 +143,6 @@ const Upload: NextPage = () => {
       <h1 className="text-5xl font-bold my-8">
         Upload obligations
       </h1>
-
-  
-
-    
-        
-        
         <div
         {...getRootProps({
           className: `dropzone 
@@ -187,12 +159,23 @@ const Upload: NextPage = () => {
       </div>
 
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <aside>
-        <h4>Files ready for upload</h4>
-        <ul className='alert alert-success'>{files}</ul>
-      </aside>
-        </div>
+        {/* <aside>
+          <h4>File ready for upload</h4>
+           <ul className='alert alert-success'>{files}</ul>
+        </aside> */}
+        
+        
+        <ul className="list-group mt-2">
+           {acceptedFiles.length > 0 && acceptedFiles.map(acceptedFile => (
+            
+                 <li className="alert alert-success">
+            {acceptedFile.name}     {acceptedFile.type} - {acceptedFile.size} bytes
 
+        </li>
+      ))}
+        </ul>
+        </div>
+       
     
       <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
          
