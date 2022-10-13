@@ -168,7 +168,7 @@ const Upload: NextPage = () => {
         <ul className="list-group mt-2">
            {acceptedFiles.length > 0 && acceptedFiles.map(acceptedFile => (
             
-                 <li className="alert alert-success">
+                 <li key={acceptedFile.name} className="alert alert-success">
             {acceptedFile.name}     {acceptedFile.type} - {acceptedFile.size} bytes
 
         </li>
