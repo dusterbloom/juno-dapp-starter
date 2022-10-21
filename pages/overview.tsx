@@ -19,8 +19,6 @@ import { networkInterfaces } from "os";
 import { CosmWasmClient, SigningCosmWasmClient, ExecuteResult } from "@cosmjs/cosmwasm-stargate";
 import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event";
 import { stringify } from "querystring";
-// import { Batch, DenomResponse, Addr, Edge, ExecuteMsg, InstantiateMsg, Network, QueryMsg } from "util/ts/Obligatto2.types.js";
-// import { Obligatto2Client } from "util/ts/Obligatto2.client";
 
 
 const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
@@ -29,24 +27,17 @@ const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM  || "ubeat";
 const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm1ufs3tlq4umljk0qfe8k5ya0x6hpavn897u2cnf9k0en9jr7qarqq3zkt9t";
 
 
-const Clear: NextPage = () => {
+
+const Overview: NextPage = () => {
 
   const { walletAddress, signingClient } = useSigningClient();
   const [balance, setBalance] = useState("");
   const [loadedAt, setLoadedAt] = useState(new Date());
   const [loading, setLoading] = useState(false);
   const [totalDebt, setTotalDebt] = useState("");
+  const [totalCredit, setTotalCredit] = useState("");
   const [edgesCount, setEdgesCount] = useState("");
 
-
-  const [creditorAddress, setCreditorAddress] = useState("");
-  const [edgeAmount, setEdgeAmount] = useState(Number);
-  const [due, setDue] = useState();
-  const [memo, setMemo] = useState("");
-  const [memo2, setMemo2] = useState("");
-
-  const [denom,setDenom] = useState("");
-  const [owner,setOwner] = useState("");
   const [edges,setEdges] = useState([{ debtor: '', creditor: '' , amount: 0, edge_id: 0, graph_id: 0}]);
   
 
@@ -77,9 +68,9 @@ const Clear: NextPage = () => {
 
 
 
-    // Get all edges 
+    // Get edges by address - user as creditor
     const QueryMsg3 = {
-      all_edges: {}
+      get_edges_by_address: {"address": walletAddress}
     }
 
     signingClient
@@ -100,7 +91,7 @@ const Clear: NextPage = () => {
 
     //  Get total debt (query with state persisted)
     const QueryMsg2 = {
-      get_total_debt: {}
+      get_total_debt_per_address: {"address": walletAddress}
     }
 
 
@@ -122,6 +113,38 @@ const Clear: NextPage = () => {
       console.log("Error signingClient.execute(): ", error);
     });
       
+
+    // Get total credit per address 
+    const QueryMsg5 = {
+      get_total_credit_per_address: {"address": walletAddress}
+    }
+
+
+    signingClient
+        ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg5)
+        .then((response: any ) => {
+
+          const { total_credit }: { total_credit: number } = response;
+          setTotalCredit(
+            `${(total_credit)}`
+          );
+        
+          console.log("totalCredit", response.total_debt);
+        
+        })
+        .catch((error) => {
+          setLoading(false);
+          setError(`Error! ${error.message}`);
+          console.log("Error signingClient.execute(): ", error);
+        });
+
+
+
+
+
+
+
+
 }, [signingClient, walletAddress, loadedAt,totalDebt]);
 
 // Get the network denomination
@@ -276,16 +299,11 @@ return (
       {/* <p className="text-2xl">Your wallet has {balance}</p> */}
 
       <h1 className="text-5xl font-bold my-8">
-        All obligations
+        My obligations
       </h1>
       <p className="text-2xl font-bold my-8">
-       Total Debt: {totalDebt} / Obligations: {edgesCount}
+       Total Debt: {totalDebt} / Total Credit: {totalCredit} / Obligations: {edgesCount}
       </p>
-
-    
-
-        
-        
 
 
       <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
@@ -404,9 +422,11 @@ return (
                   {edges.map((e,index) => 
                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                    
-                        <td  className="py-4 px-6">
+                      
+                        <td className="py-4 px-6">
                         {e.edge_id}
                         </td>
+                        
                         <td className="py-4 px-6">
                            { e.debtor }
                         </td>
@@ -432,6 +452,6 @@ return (
   );
 };
 
-export default Clear;
+export default Overview;
 
 export {}

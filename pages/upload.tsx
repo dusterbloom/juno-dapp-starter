@@ -63,18 +63,10 @@ const Upload: NextPage = () => {
     acceptedFiles
   } = useDropzone({
     onDrop,
-    // accept: 'text/csv'
-    
-    
-  
+    maxSize: 5242880 
   });
 
 
-  // const files = acceptedFiles.map(file => (
-  //   <li key={file.name}>
-  //     {file.name} - {file.size} bytes
-  //   </li>
-  // ));
 
   // Loads the wallet and converts the balance
   useEffect(() => {
