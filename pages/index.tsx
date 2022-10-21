@@ -1,10 +1,79 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import WalletLoader from "components/WalletLoader";
 import { useSigningClient } from "contexts/cosmwasm";
+import {
+  convertMicroDenomToDenom,
+  convertFromMicroDenom,
+  convertDenomToMicroDenom,
+} from "util/conversion";
+
+const PUBLIC_CHAIN_NAME = process.env.NEXT_PUBLIC_CHAIN_NAME;
+const PUBLIC_FEE_DENOM = process.env.NEXT_PUBLIC_FEE_DENOM || "ubeat" ;
+const PUBLIC_STAKING_DENOM = process.env.NEXT_PUBLIC_STAKING_DENOM || "ubeat" ;
+
+const PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "wasm1ufs3tlq4umljk0qfe8k5ya0x6hpavn897u2cnf9k0en9jr7qarqq3zkt9t";
+
+
 
 const Home: NextPage = () => {
-  const { walletAddress } = useSigningClient();
+  const { walletAddress, signingClient } = useSigningClient();
+  const [balance, setBalance] = useState("");
+  const [isAdmin, setIsAdmin] = useState("");
+  const [loadedAt, setLoadedAt] = useState(new Date());
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!signingClient || walletAddress.length === 0) {
+      return;
+    }
+    setError("");
+    setSuccess("");
+
+    signingClient
+      .getBalance(walletAddress, PUBLIC_STAKING_DENOM)
+      .then((response: any) => {
+        const { amount, denom }: { amount: number; denom: string } = response;
+        setBalance(
+          `${convertMicroDenomToDenom(amount)} ${convertFromMicroDenom(denom)}`
+        );
+        console.log("balance", response)
+      })
+      .catch((error) => {
+        setError(`Error! ${error.message}`);
+        console.log("Error signingClient.getBalance(): ", error);
+      });
+
+      //  // Get the admin  
+      //  const QueryMsg3 = {
+      //       get_owner: {addr:walletAddress}
+      //       }
+
+
+    //   // Get the admin
+    // signingClient
+    // ?.queryContractSmart(PUBLIC_CONTRACT_ADDRESS, QueryMsg3)
+    // .then((response: any) => {
+    //   console.log("admin", response);
+    //   setIsAdmin(response.isadmin);
+    //   setLoading(false);
+    // })
+    // .catch((error) => {
+    //   setError(`Error! ${error.message}`);
+    //   console.log("Error signingClient.execute(): ", error);
+    // });
+
+  
+
+
+}, [signingClient, walletAddress, loadedAt]);
+
+
+
+
 
 
   return (
@@ -15,12 +84,15 @@ const Home: NextPage = () => {
       </h1>
 
       <div className="mt-3 text-2xl">
-        Your wallet address is:{" "}
+        Your wallet address is:{" "} 
         <pre className="font-mono break-all whitespace-pre-wrap">
           {walletAddress}
         </pre>
       </div>
-    
+    <div className="mt-3 text-3xl">           
+    <Link href="/overview" passHref>
+    Overview</Link>
+    </div>
     <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 max-w-full sm:w-full">
     <Link href="/create" passHref>
       <a className="p-6 mt-6 text-left border border-secondary hover:border-primary w-96 rounded-xl hover:text-primary focus:text-primary-focus">
