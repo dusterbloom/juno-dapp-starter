@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className="flex flex-col items-center justify-center min-h-screen bg-base-100 text-base-content">
       <Head>
         <title>{process.env.NEXT_PUBLIC_SITE_TITLE}</title>
-        <meta name="description" content="Developped by CoFi Team @Informal.systems" />
+        <meta name="description" content="Developed by CoFi Team @Informal.systems" />
         <link rel="icon" href="/favicon_tiny.ico" />
       </Head>
 
