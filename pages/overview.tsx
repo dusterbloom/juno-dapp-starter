@@ -306,7 +306,7 @@ return (
       </p>
 
 
-      <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
+      {/* <div className="flex flex-col md:flex-row mt-4 text-2xl w-full max-w-xl justify-between">
          
         <button
           className="mt-4 md:mt-0 btn btn-primary btn-lg font-semibold hover:text-base-100 text-2xl rounded-full flex-grow"
@@ -336,7 +336,7 @@ return (
         
       
       </div>
-      
+       */}
 
       
   
